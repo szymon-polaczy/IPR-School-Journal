@@ -24,9 +24,10 @@ class Subject extends Model
      */
     protected $fillable = [
         'name',
+        'teacher_id',
     ];
 
     public function teacher(): BelongsTo {
-        return $this->belongsTo(Teacher::class, 'id', 'teacher_id');
+        return $this->belongsTo(Teacher::class, 'teacher_id', 'id');
     }
 }

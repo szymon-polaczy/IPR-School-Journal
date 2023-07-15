@@ -10,7 +10,7 @@
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
     </head>
-<body>
+<body style="margin: 120px;5">
     Dashboard
 
     <section style="margin-top: 50px;">
@@ -409,6 +409,87 @@
             </select>
 
             <button>Save student</button>
+        </form>
+    </section>
+    @endcan
+
+    <section style="margin-top: 50px;">
+        <h2>All subjects</h2>
+        <ul>
+            @foreach($subjects as $subject)
+                <li style="display: flex; gap: 20px;">
+                    <p>
+                        {{$subject->name}}
+                        -
+                        Teacher {{$subject->teacher->user->name}}
+                    </p>
+
+                    @can('edit-subjects')
+                    -
+                    <form action="/edit-subject/{{$subject->id}}" method="POST">
+                        <!--TODO: Error - when updating and error comes through all forms show it-->
+                        @csrf
+                        @method('PUT')
+            
+                        <input type="text" name="name" 
+                            placeholder="subject name"
+                            value="{{$subject->name}}"
+                            class="@error('name') is-invalid @enderror"
+                        />
+            
+                        @error('name')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+            
+                        <select name="teacher_id">
+                            @foreach($teachers as $teacher)
+                                <option value="{{$teacher->id}}" @if($subject->teacher->id == $teacher->id) selected @endif >
+                                    {{$teacher->user->name}}
+                                </option>
+                            @endforeach
+                        </select>
+
+                        <button>Update</button>
+                    </form>
+                    @endcan
+
+                    @can('delete-subjects')
+                    -
+                    <form action="/delete-subject/{{$subject->id}}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button>Delete</button>
+                    </form>
+                    @endcan
+                </li>
+            @endforeach
+        </ul>
+    </section>
+
+    @can('create-subjects')
+    <section style="margin-top: 50px;">
+        <h2>Create a New Subject</h2>
+        <form action="/create-subject" method="POST">
+            @csrf
+            
+            <input type="text" name="name" 
+                placeholder="subject name"
+                class="@error('name') is-invalid @enderror"
+            />
+
+            @error('name')
+                <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
+
+            <select name="teacher_id">
+                @foreach($teachers as $teacher)
+                    <option value="{{$teacher->id}}">
+                        {{$teacher->user->name}}
+                    </option>
+                @endforeach
+            </select>
+
+            <button>Save subject</button>
         </form>
     </section>
     @endcan

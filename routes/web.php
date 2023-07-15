@@ -3,10 +3,12 @@
 use App\Http\Controllers\ClassController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\TeacherController;
 use App\Models\ClassModel;
 use App\Models\Room;
 use App\Models\Student;
+use App\Models\Subject;
 use App\Models\Teacher;
 use Illuminate\Support\Facades\Route;
 
@@ -32,6 +34,7 @@ Route::get('/dashboard', function () {
         'rooms' => Room::all(),
         'teachers' => Teacher::all(),
         'students' => Student::all(),
+        'subjects' => Subject::all(),
     ]);
 })->name('dashboard')->middleware('auth');
 
@@ -57,3 +60,8 @@ Route::delete('/delete-teacher/{teacher}', [TeacherController::class, 'deleteTea
 Route::post('/create-student', [StudentController::class, 'createStudent'])->middleware('can:create-students');
 Route::put('/edit-student/{student}', [StudentController::class, 'editStudent'])->middleware('can:edit-students');
 Route::delete('/delete-student/{student}', [StudentController::class, 'deleteStudent'])->middleware('can:delete-students');
+
+
+Route::post('/create-subject', [SubjectController::class, 'createSubject'])->middleware('can:create-subjects');
+Route::put('/edit-subject/{subject}', [SubjectController::class, 'editSubject'])->middleware('can:edit-subjects');
+Route::delete('/delete-subject/{subject}', [SubjectController::class, 'deleteSubject'])->middleware('can:delete-subjects');
