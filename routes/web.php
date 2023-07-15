@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\ClassController;
+use App\Models\ClassModel;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,7 +20,13 @@ Route::get('/', function () {
 })->name('homepage');
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return view('dashboard', [
+        'classes' => ClassModel::all(),
+    ]);
 })->name('dashboard')->middleware('auth');
 
 Route::post('login', [\App\Http\Controllers\LoginController::class, 'authenticate'])->name('login');
+
+Route::post('/create-class', [ClassController::class, 'createClass']);
+Route::put('/edit-class/{class}', [ClassController::class, 'editClass']);
+Route::delete('/delete-class/{class}', [ClassController::class, 'deleteClass']);
