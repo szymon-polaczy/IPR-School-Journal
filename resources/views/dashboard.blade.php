@@ -67,5 +67,60 @@
             <button>Save class</button>
         </form>
     </section>
+
+    <section style="margin-top: 50px;">
+        <h2>All Rooms</h2>
+        <ul>
+            @foreach($rooms as $room)
+                <li>
+                    <a href="">
+                        See {{$room->name}}
+                    </a>
+                    -
+                    <form action="/edit-room/{{$room->id}}" method="POST">
+                        <!--TODO: Error - when updating and error comes through all forms show it-->
+                        @csrf
+                        @method('PUT')
+
+                        <input type="text" name="name"
+                            placeholder="room name"
+                            value="{{$room->name}}"
+                            class="@error('title') is-invalid @enderror"
+                        />
+
+                        @error('name')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+
+                        <button>Update</button>
+                    </form>
+                    -
+                    <form action="/delete-room/{{$room->id}}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button>Delete</button>
+                    </form>
+                </li>
+            @endforeach
+        </ul>
+    </section>
+
+    <section style="margin-top: 50px;">
+        <h2>Create a New Class</h2>
+        <form action="/create-room" method="POST">
+            @csrf
+            
+            <input type="text" name="name" 
+                placeholder="room name"
+                class="@error('title') is-invalid @enderror"
+            />
+
+            @error('name')
+                <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
+
+            <button>Save room</button>
+        </form>
+    </section>
 </body>
 </html>
