@@ -24,13 +24,15 @@ class Grade extends Model
      */
     protected $fillable = [
         'value',
+        'student_id',
+        'assignment_id',
     ];
 
     public function student(): BelongsTo {
-        return $this->belongsTo(Student::class, 'id', 'student_id');
+        return $this->belongsTo(Student::class, 'student_id', 'id');
     }
 
     public function assignment(): BelongsTo {
-        return $this->belongsTo(Assignment::class, 'id', 'assignment_id');
+        return $this->belongsTo(Assignment::class, 'assignment_id', 'id');
     }
 }

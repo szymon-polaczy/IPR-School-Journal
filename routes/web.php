@@ -1,13 +1,16 @@
 <?php
 
+use App\Enums\GradeEnums;
 use App\Http\Controllers\AssignmentController;
 use App\Http\Controllers\ClassController;
+use App\Http\Controllers\GradeController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\TeacherController;
 use App\Models\Assignment;
 use App\Models\ClassModel;
+use App\Models\Grade;
 use App\Models\Room;
 use App\Models\Student;
 use App\Models\Subject;
@@ -38,6 +41,8 @@ Route::get('/dashboard', function () {
         'students' => Student::all(),
         'subjects' => Subject::all(),
         'assignments' => Assignment::all(),
+        'grades' => Grade::all(),
+        'grade_values' => GradeEnums::cases(),
     ]);
 })->name('dashboard')->middleware('auth');
 
@@ -73,3 +78,8 @@ Route::delete('/delete-subject/{subject}', [SubjectController::class, 'deleteSub
 Route::post('/create-assignment', [AssignmentController::class, 'createAssignment'])->middleware('can:create-assignments');
 Route::put('/edit-assignment/{assignment}', [AssignmentController::class, 'editAssignment'])->middleware('can:edit-assignments');
 Route::delete('/delete-assignment/{assignment}', [AssignmentController::class, 'deleteAssignment'])->middleware('can:delete-assignments');
+
+
+Route::post('/create-grade', [GradeController::class, 'createGrade'])->middleware('can:create-grades');
+Route::put('/edit-grade/{grade}', [GradeController::class, 'editGrade'])->middleware('can:edit-grades');
+Route::delete('/delete-grade/{grade}', [GradeController::class, 'deleteGrade'])->middleware('can:delete-grades');

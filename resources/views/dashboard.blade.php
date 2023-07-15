@@ -614,5 +614,99 @@
         </form>
     </section>
     @endcan
+
+
+
+    <section style="margin-top: 150px;">
+        <h2>All grades</h2>
+        <ul>
+            @foreach($grades as $grade)
+                <li style="display: flex; gap: 20px;">
+                    <p>
+                        {{$grade->assignment->name}} - {{$grade->student->user->name}} - {{$grade->value}}
+                    </p>
+
+                    @can('edit-grades')
+                    -
+                    <form action="/edit-grade/{{$grade->id}}" method="POST">
+                        <!--TODO: Error - when updating and error comes through all forms show it-->
+                        @csrf
+                        @method('PUT')
+            
+                        <select name="assignment_id">
+                            @foreach($assignments as $assignment)
+                                <option value="{{$assignment->id}}" @if($grade->assignment->id == $assignment->id) selected @endif >
+                                    {{$assignment->name}}
+                                </option>
+                            @endforeach
+                        </select>
+            
+                        <select name="student_id">
+                            @foreach($students as $student)
+                                <option value="{{$student->id}}" @if($grade->student->id == $student->id) selected @endif >
+                                    {{$student->user->name}}
+                                </option>
+                            @endforeach
+                        </select>
+            
+                        <select name="value">
+                            @foreach($grade_values as $value)
+                                <option value="{{$value}}" @if($grade->value == $value->value) selected @endif >
+                                    {{$value}}
+                                </option>
+                            @endforeach
+                        </select>
+
+                        <button>Update</button>
+                    </form>
+                    @endcan
+
+                    @can('delete-grades')
+                    -
+                    <form action="/delete-grade/{{$grade->id}}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button>Delete</button>
+                    </form>
+                    @endcan
+                </li>
+            @endforeach
+        </ul>
+    </section>
+
+    @can('create-grades')
+    <section style="margin-top: 50px;">
+        <h2>Create a New Grade</h2>
+        <form action="/create-grade" method="POST">
+            @csrf
+            
+            <select name="assignment_id">
+                @foreach($assignments as $assignment)
+                    <option value="{{$assignment->id}}">
+                        {{$assignment->name}}
+                    </option>
+                @endforeach
+            </select>
+
+            <select name="student_id">
+                @foreach($students as $student)
+                    <option value="{{$student->id}}">
+                        {{$student->user->name}}
+                    </option>
+                @endforeach
+            </select>
+
+            <select name="value">
+                @foreach($grade_values as $value)
+                    <option value="{{$value}}">
+                        {{$value}}
+                    </option>
+                @endforeach
+            </select>
+
+            <button>Save grades</button>
+        </form>
+    </section>
+    @endcan
 </body>
 </html>

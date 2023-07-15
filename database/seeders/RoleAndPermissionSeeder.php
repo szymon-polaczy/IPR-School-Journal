@@ -37,6 +37,10 @@ class RoleAndPermissionSeeder extends Seeder
         Permission::create(['name' => 'edit-assignments']);
         Permission::create(['name' => 'delete-assignments']);
 
+        Permission::create(['name' => 'create-grades']);
+        Permission::create(['name' => 'edit-grades']);
+        Permission::create(['name' => 'delete-grades']);
+
         $adminRole = Role::create(['name' => 'Admin']);
         $teacherRole = Role::create(['name' => 'Teacher']);
         $studentRole = Role::create(['name' => 'Student']);
@@ -65,12 +69,20 @@ class RoleAndPermissionSeeder extends Seeder
             'create-assignments',
             'edit-assignments',
             'delete-assignments',
+
+            'create-grades',
+            'edit-grades',
+            'delete-grades',
         ]);
 
         $teacherRole->givePermissionTo([
             'create-assignments',
             'edit-assignments',
             'delete-assignments',
+
+            'create-grades',
+            'edit-grades',
+            'delete-grades',
         ]);
     }
 }
