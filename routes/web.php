@@ -1,10 +1,12 @@
 <?php
 
+use App\Http\Controllers\AssignmentController;
 use App\Http\Controllers\ClassController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\TeacherController;
+use App\Models\Assignment;
 use App\Models\ClassModel;
 use App\Models\Room;
 use App\Models\Student;
@@ -35,6 +37,7 @@ Route::get('/dashboard', function () {
         'teachers' => Teacher::all(),
         'students' => Student::all(),
         'subjects' => Subject::all(),
+        'assignments' => Assignment::all(),
     ]);
 })->name('dashboard')->middleware('auth');
 
@@ -65,3 +68,8 @@ Route::delete('/delete-student/{student}', [StudentController::class, 'deleteStu
 Route::post('/create-subject', [SubjectController::class, 'createSubject'])->middleware('can:create-subjects');
 Route::put('/edit-subject/{subject}', [SubjectController::class, 'editSubject'])->middleware('can:edit-subjects');
 Route::delete('/delete-subject/{subject}', [SubjectController::class, 'deleteSubject'])->middleware('can:delete-subjects');
+
+
+Route::post('/create-assignment', [AssignmentController::class, 'createAssignment'])->middleware('can:create-assignments');
+Route::put('/edit-assignment/{assignment}', [AssignmentController::class, 'editAssignment'])->middleware('can:edit-assignments');
+Route::delete('/delete-assignment/{assignment}', [AssignmentController::class, 'deleteAssignment'])->middleware('can:delete-assignments');

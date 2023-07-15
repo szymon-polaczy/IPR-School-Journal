@@ -10,7 +10,7 @@
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
     </head>
-<body style="margin: 120px;5">
+<body style="margin: 120px;">
     Dashboard
 
     <section style="margin-top: 50px;">
@@ -76,7 +76,7 @@
     </section>
     @endcan
 
-    <section style="margin-top: 50px;">
+    <section style="margin-top: 150px;">
         <h2>All Rooms</h2>
         <ul>
             @foreach($rooms as $room)
@@ -139,7 +139,7 @@
     </section>
     @endcan
 
-    <section style="margin-top: 50px;">
+    <section style="margin-top: 150px;">
         <h2>All Teachers</h2>
         <ul>
             @foreach($teachers as $teacher)
@@ -276,7 +276,7 @@
     </section>
     @endcan
 
-    <section style="margin-top: 50px;">
+    <section style="margin-top: 150px;">
         <h2>All Students</h2>
         <ul>
             @foreach($students as $student)
@@ -413,7 +413,9 @@
     </section>
     @endcan
 
-    <section style="margin-top: 50px;">
+
+
+    <section style="margin-top: 150px;">
         <h2>All subjects</h2>
         <ul>
             @foreach($subjects as $subject)
@@ -490,6 +492,125 @@
             </select>
 
             <button>Save subject</button>
+        </form>
+    </section>
+    @endcan
+
+
+
+    <section style="margin-top: 150px;">
+        <h2>All assignments</h2>
+        <ul>
+            @foreach($assignments as $assignment)
+                <li style="display: flex; gap: 20px;">
+                    <p>
+                        {{$assignment->name}}
+                        -
+                        Teacher {{$assignment->teacher->user->name}}
+                        -
+                        Subject {{$assignment->subject->name}}
+                        -
+                        Class {{$assignment->class->name}}
+                    </p>
+
+                    @can('edit-assignments')
+                    -
+                    <form action="/edit-assignment/{{$assignment->id}}" method="POST">
+                        <!--TODO: Error - when updating and error comes through all forms show it-->
+                        @csrf
+                        @method('PUT')
+            
+                        <input type="text" name="name" 
+                            placeholder="assignment name"
+                            value="{{$assignment->name}}"
+                            class="@error('name') is-invalid @enderror"
+                        />
+            
+                        @error('name')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+            
+                        <select name="teacher_id">
+                            @foreach($teachers as $teacher)
+                                <option value="{{$teacher->id}}" @if($assignment->teacher->id == $teacher->id) selected @endif >
+                                    {{$teacher->user->name}}
+                                </option>
+                            @endforeach
+                        </select>
+            
+                        <select name="subject_id">
+                            @foreach($subjects as $subject)
+                                <option value="{{$subject->id}}" @if($assignment->subject->id == $subject->id) selected @endif >
+                                    {{$subject->name}}
+                                </option>
+                            @endforeach
+                        </select>
+            
+                        <select name="class_id">
+                            @foreach($classes as $class)
+                                <option value="{{$class->id}}" @if($assignment->class->id == $class->id) selected @endif >
+                                    {{$class->name}}
+                                </option>
+                            @endforeach
+                        </select>
+
+                        <button>Update</button>
+                    </form>
+                    @endcan
+
+                    @can('delete-assignments')
+                    -
+                    <form action="/delete-assignment/{{$assignment->id}}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button>Delete</button>
+                    </form>
+                    @endcan
+                </li>
+            @endforeach
+        </ul>
+    </section>
+
+    @can('create-assignments')
+    <section style="margin-top: 50px;">
+        <h2>Create a New Assignment</h2>
+        <form action="/create-assignment" method="POST">
+            @csrf
+            
+            <input type="text" name="name" 
+                placeholder="assignment name"
+                class="@error('name') is-invalid @enderror"
+            />
+
+            @error('name')
+                <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
+
+            <select name="teacher_id">
+                @foreach($teachers as $teacher)
+                    <option value="{{$teacher->id}}">
+                        {{$teacher->user->name}}
+                    </option>
+                @endforeach
+            </select>
+
+            <select name="subject_id">
+                @foreach($subjects as $subject)
+                    <option value="{{$subject->id}}">
+                        {{$subject->name}}
+                    </option>
+                @endforeach
+            </select>
+
+            <select name="class_id">
+                @foreach($classes as $class)
+                    <option value="{{$class->id}}">
+                        {{$class->name}}
+                    </option>
+                @endforeach
+            </select>
+
+            <button>Save assignment</button>
         </form>
     </section>
     @endcan

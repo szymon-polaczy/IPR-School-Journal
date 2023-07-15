@@ -25,17 +25,20 @@ class Assignment extends Model
     protected $fillable = [
         'name',
         'grade',
+        'teacher_id',
+        'subject_id',
+        'class_id',
     ];
 
     public function teacher(): BelongsTo {
-        return $this->belongsTo(Teacher::class, 'id', 'teacher_id');
+        return $this->belongsTo(Teacher::class, 'teacher_id', 'id');
     }
 
     public function subject(): BelongsTo {
-        return $this->belongsTo(Subject::class, 'id', 'subject_id');
+        return $this->belongsTo(Subject::class, 'subject_id', 'id');
     }
 
     public function class(): BelongsTo {
-        return $this->belongsTo(ClassModel::class, 'id', 'class_id');
+        return $this->belongsTo(ClassModel::class, 'class_id', 'id');
     }
 }
