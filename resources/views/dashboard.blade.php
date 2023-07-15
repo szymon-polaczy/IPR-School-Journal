@@ -21,6 +21,8 @@
                     <a href="">
                         See {{$class->name}}
                     </a>
+
+                    @can('edit-classes')
                     -
                     <form action="/edit-class/{{$class->id}}" method="POST">
                         <!--TODO: Error - when updating and error comes through all forms show it-->
@@ -39,17 +41,22 @@
 
                         <button>Update</button>
                     </form>
+                    @endcan
+
+                    @can('delete-classes')
                     -
                     <form action="/delete-class/{{$class->id}}" method="POST">
                         @csrf
                         @method('DELETE')
                         <button>Delete</button>
                     </form>
+                    @endcan
                 </li>
             @endforeach
         </ul>
     </section>
 
+    @can('create-classes')
     <section style="margin-top: 50px;">
         <h2>Create a New Class</h2>
         <form action="/create-class" method="POST">
@@ -67,6 +74,7 @@
             <button>Save class</button>
         </form>
     </section>
+    @endcan
 
     <section style="margin-top: 50px;">
         <h2>All Rooms</h2>
@@ -76,6 +84,8 @@
                     <a href="">
                         See {{$room->name}}
                     </a>
+
+                    @can('edit-rooms')
                     -
                     <form action="/edit-room/{{$room->id}}" method="POST">
                         <!--TODO: Error - when updating and error comes through all forms show it-->
@@ -94,19 +104,24 @@
 
                         <button>Update</button>
                     </form>
+                    @endcan
+
+                    @can('delete-rooms')
                     -
                     <form action="/delete-room/{{$room->id}}" method="POST">
                         @csrf
                         @method('DELETE')
                         <button>Delete</button>
                     </form>
+                    @endcan
                 </li>
             @endforeach
         </ul>
     </section>
 
+    @can('create-rooms')
     <section style="margin-top: 50px;">
-        <h2>Create a New Class</h2>
+        <h2>Create a New Room</h2>
         <form action="/create-room" method="POST">
             @csrf
             
@@ -122,5 +137,6 @@
             <button>Save room</button>
         </form>
     </section>
+    @endcan
 </body>
 </html>

@@ -8,8 +8,6 @@ use Illuminate\Http\Request;
 class ClassController extends Controller
 {
     public function editClass(ClassModel $class, Request $request) {
-        //TODO: Who Can edit classes
-
         $incomingFields = $request->validate([
             'name' => 'required|unique:class|max:255',
         ]);
@@ -21,14 +19,11 @@ class ClassController extends Controller
     }
 
     public function deleteClass(ClassModel $class) {
-        //TODO: Who Can delete classes
         $class->delete();
         return redirect('dashboard');
     }
 
     public function createClass(Request $request) {
-        //TODO: Who Can create classes
-
         $incomingFields = $request->validate([
             'name' => 'required|unique:class|max:255',
         ]);

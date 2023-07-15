@@ -21,6 +21,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        $this->call([
+            RoleAndPermissionSeeder::class,
+        ]);
+
         $admin = User::create(array(
             'name' => 'thomas',
             'surname' => 'frey',
@@ -28,12 +32,16 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('password')
         ));
 
+        $admin->assignRole('Admin');
+
         $user_teacher = User::create(array(
             'name' => 'tim',
             'surname' => 'teacher',
             'email' => 'teacher@email.com',
             'password' => Hash::make('password'),
         ));
+
+        $user_teacher->assignRole('Teacher');
 
         $room = Room::create(array(
             'name' => 'gym',
@@ -55,6 +63,8 @@ class DatabaseSeeder extends Seeder
             'email' => 'student@email.com',
             'password' => Hash::make('password'),
         ));
+
+        $user_student->assignRole('Student');
 
         $class = ClassModel::create(array(
             'name' => '3TI',
