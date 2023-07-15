@@ -34,22 +34,16 @@ class DatabaseSeeder extends Seeder
 
         $admin->assignRole('Admin');
 
-        $user_teacher = User::create(array(
-            'name' => 'tim',
-            'surname' => 'teacher',
-            'email' => 'teacher@email.com',
-            'password' => Hash::make('password'),
-        ));
-
-        $user_teacher->assignRole('Teacher');
-
-        $room = Room::create(array(
-            'name' => 'gym',
-        ));
-
         $teacher = Teacher::create(array(
-            'user_id' => $user_teacher->id,
-            'default_room_id' => $room->id
+            'user_id' => User::create(array(
+                'name' => 'tim',
+                'surname' => 'teacher',
+                'email' => 'teacher@email.com',
+                'password' => Hash::make('password'),
+            ))->assignRole('Teacher')->id,
+            'default_room_id' => Room::create(array(
+                'name' => 'gym',
+            ))->id,
         ));
 
         $subject = Subject::create(array(
