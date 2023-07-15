@@ -17,11 +17,21 @@ class Student extends Model
      */
     protected $table = 'student';
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, int>
+     */
+    protected $fillable = [
+        'user_id',
+        'class_id',
+    ];
+
     public function user(): BelongsTo {
-        return $this->belongsTo(User::class, 'id', 'user_id');
+        return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
     public function class(): BelongsTo {
-        return $this->belongsTo(ClassModel::class, 'id', 'class_id');
+        return $this->belongsTo(ClassModel::class, 'class_id', 'id');
     }
 }

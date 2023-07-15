@@ -51,22 +51,18 @@ class DatabaseSeeder extends Seeder
             'teacher_id' => $teacher->id,
         ));
 
-        $user_student = User::create(array(
-            'name' => 'jimmy',
-            'surname' => 'student',
-            'email' => 'student@email.com',
-            'password' => Hash::make('password'),
-        ));
-
-        $user_student->assignRole('Student');
-
         $class = ClassModel::create(array(
-            'name' => '3TI',
+                'name' => '3TI',
         ));
 
         $student = Student::create(array(
-            'user_id' => $user_student->id,
-            'class_id' => $class->id
+            'user_id' => User::create(array(
+                'name' => 'jimmy',
+                'surname' => 'student',
+                'email' => 'student@email.com',
+                'password' => Hash::make('password'),
+            ))->assignRole('Student')->id,
+            'class_id' => $class->id,
         ));
 
         $assignment = Assignment::create(array(

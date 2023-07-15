@@ -271,7 +271,144 @@
                 @endforeach
             </select>
 
-            <button>Save room</button>
+            <button>Save teacher</button>
+        </form>
+    </section>
+    @endcan
+
+    <section style="margin-top: 50px;">
+        <h2>All Students</h2>
+        <ul>
+            @foreach($students as $student)
+                <li style="display: flex; gap: 20px;">
+                    <p>
+                        {{$student->user->name}} {{$student->user->surname}} 
+                        -
+                        Class {{$student->class->name}}
+                    </p>
+
+                    @can('edit-students')
+                    -
+                    <form action="/edit-student/{{$student->id}}" method="POST">
+                        <!--TODO: Error - when updating and error comes through all forms show it-->
+                        @csrf
+                        @method('PUT')
+            
+                        <input type="text" name="name" 
+                            placeholder="student name"
+                            value="{{$student->user->name}}"
+                            class="@error('name') is-invalid @enderror"
+                        />
+            
+                        @error('name')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+                        
+                        <input type="text" name="surname" 
+                            placeholder="student surname"
+                            value="{{$student->user->surname}}"
+                            class="@error('name') is-invalid @enderror"
+                        />
+            
+                        @error('surname')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+                        
+                        <input type="email" name="email" 
+                            placeholder="student email"
+                            value="{{$student->user->email}}"
+                            class="@error('email') is-invalid @enderror"
+                        />
+            
+                        @error('email')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+                        
+                        <input type="password" name="password" 
+                            placeholder="only insert password for update"
+                            class="@error('password') is-invalid @enderror"
+                        />
+            
+                        @error('password')
+                            <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
+            
+                        <select name="class">
+                            @foreach($classes as $class)
+                                <option value="{{$class->id}}" @if($student->class->id == $room->id) selected @endif >
+                                    {{$class->name}}
+                                </option>
+                            @endforeach
+                        </select>
+
+                        <button>Update</button>
+                    </form>
+                    @endcan
+
+                    @can('delete-students')
+                    -
+                    <form action="/delete-student/{{$student->id}}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button>Delete</button>
+                    </form>
+                    @endcan
+                </li>
+            @endforeach
+        </ul>
+    </section>
+
+    @can('create-students')
+    <section style="margin-top: 50px;">
+        <h2>Create a New Student</h2>
+        <form action="/create-student" method="POST">
+            @csrf
+            
+            <input type="text" name="name" 
+                placeholder="student name"
+                class="@error('name') is-invalid @enderror"
+            />
+
+            @error('name')
+                <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
+            
+            <input type="text" name="surname" 
+                placeholder="student surname"
+                class="@error('name') is-invalid @enderror"
+            />
+
+            @error('surname')
+                <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
+            
+            <input type="email" name="email" 
+                placeholder="student email"
+                class="@error('email') is-invalid @enderror"
+            />
+
+            @error('email')
+                <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
+            
+            <input type="password" name="password" 
+                placeholder="temporary password"
+                class="@error('password') is-invalid @enderror"
+            />
+
+            @error('password')
+                <div class="alert alert-danger">{{ $message }}</div>
+            @enderror
+
+            <select name="class">
+                @foreach($classes as $class)
+                    <option value="{{$class->id}}">
+                        {{$class->name}}
+                    </option>
+                @endforeach
+            </select>
+
+            <button>Save student</button>
         </form>
     </section>
     @endcan
