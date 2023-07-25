@@ -14,7 +14,7 @@
     Dashboard
 
     <section style="margin-top: 50px;">
-        <h2>All Clases</h2>
+        <h2>All Classes</h2>
         <ul>
             @foreach($classes as $class)
                 <li style="display: flex; gap: 20px;">
@@ -354,6 +354,96 @@
                     </form>
                     @endcan
                 </li>
+            @endforeach
+        </ul>
+    </section>
+
+    <section style="margin-top: 50px;">
+        <h2>All Students By Class</h2>
+        <ul>
+            @foreach($classes as $class)
+                @if($class->students->count())
+                <li>
+                    <p>Class {{$class->name}}</p>
+
+                    <ul>
+                        @foreach($class->students as $student)
+                            <li style="display: flex; gap: 20px;">
+                                <p>
+                                    {{$student->user->name}} {{$student->user->surname}}
+                                </p>
+
+                                @can('edit-students')
+                                -
+                                <form action="/edit-student/{{$student->id}}" method="POST">
+                                    <!--TODO: Error - when updating and error comes through all forms show it-->
+                                    @csrf
+                                    @method('PUT')
+                        
+                                    <input type="text" name="name" 
+                                        placeholder="student name"
+                                        value="{{$student->user->name}}"
+                                        class="@error('name') is-invalid @enderror"
+                                    />
+                        
+                                    @error('name')
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror
+                                    
+                                    <input type="text" name="surname" 
+                                        placeholder="student surname"
+                                        value="{{$student->user->surname}}"
+                                        class="@error('name') is-invalid @enderror"
+                                    />
+                        
+                                    @error('surname')
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror
+                                    
+                                    <input type="email" name="email" 
+                                        placeholder="student email"
+                                        value="{{$student->user->email}}"
+                                        class="@error('email') is-invalid @enderror"
+                                    />
+                        
+                                    @error('email')
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror
+                                    
+                                    <input type="password" name="password" 
+                                        placeholder="only insert password for update"
+                                        class="@error('password') is-invalid @enderror"
+                                    />
+                        
+                                    @error('password')
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror
+                        
+                                    <select name="class">
+                                        @foreach($classes as $class)
+                                            <option value="{{$class->id}}" @if($student->class->id == $room->id) selected @endif >
+                                                {{$class->name}}
+                                            </option>
+                                        @endforeach
+                                    </select>
+
+                                    <button>Update</button>
+                                </form>
+                                @endcan
+
+                                @can('delete-students')
+                                -
+                                <form action="/delete-student/{{$student->id}}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button>Delete</button>
+                                </form>
+                                @endcan
+                            </li>
+                        @endforeach
+                    </ul>
+                </li>
+                @endif
             @endforeach
         </ul>
     </section>
