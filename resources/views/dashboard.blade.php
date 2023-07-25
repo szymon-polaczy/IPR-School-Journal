@@ -335,7 +335,7 @@
             
                         <select name="class">
                             @foreach($classes as $class)
-                                <option value="{{$class->id}}" @if($student->class->id == $room->id) selected @endif >
+                                <option value="{{$class->id}}" @if($student->class->id == $class->id) selected @endif >
                                     {{$class->name}}
                                 </option>
                             @endforeach
@@ -421,7 +421,7 @@
                         
                                     <select name="class">
                                         @foreach($classes as $class)
-                                            <option value="{{$class->id}}" @if($student->class->id == $room->id) selected @endif >
+                                            <option value="{{$class->id}}" @if($student->class->id == $class->id) selected @endif >
                                                 {{$class->name}}
                                             </option>
                                         @endforeach
