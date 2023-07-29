@@ -17,6 +17,8 @@ use App\Models\Subject;
 use App\Models\Teacher;
 use Illuminate\Support\Facades\Route;
 
+use Illuminate\Http\Request;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -83,3 +85,21 @@ Route::delete('/delete-assignment/{assignment}', [AssignmentController::class, '
 Route::post('/create-grade', [GradeController::class, 'createGrade'])->middleware('can:create-grades');
 Route::put('/edit-grade/{grade}', [GradeController::class, 'editGrade'])->middleware('can:edit-grades');
 Route::delete('/delete-grade/{grade}', [GradeController::class, 'deleteGrade'])->middleware('can:delete-grades');
+
+Route::post('/create-user', function(Request $request) {
+    $incomingFields = $request->validate([
+        'user_type' => 'required',
+    ]);
+
+    switch($incomingFields['user_type']) {
+        case 'student':
+            return app(StudentController::class)->callAction('createStudent', [$request]);
+            break;
+        case 'teacher':
+            return app(TeacherController::class)->callAction('createTeacher', [$request]);
+            break;
+        case 'admin':
+            //TODO: I actually did't create anything for admins when I think about it
+            break;
+    }
+})->middleware('can:create-users');

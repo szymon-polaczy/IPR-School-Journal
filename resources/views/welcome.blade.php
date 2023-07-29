@@ -1,18 +1,10 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+@extends('layouts.app')
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+@section('title', 'Login')
 
-    <title>School Journal</title>
+@section('content')
 
-    <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="{{ url('/css/dist.css') }}" />
-</head>
-
-<body class="antialiased grid md:grid-cols-2 justify-center items-center
+<div class="antialiased grid md:grid-cols-2 justify-center items-center
     min-h-screen py-16 px-4 md:px-16 gap-4 md:gap-12"
 >
     <img src="{{ url('images/undraw_educator_re_ju47.svg') }}" alt=""
@@ -65,6 +57,6 @@
             </button>
         </div>
     </form>
-</body>
+</div>
 
-</html>
+@endsection

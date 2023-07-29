@@ -1,16 +1,11 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+@extends('layouts.app')
 
-        <title>Laravel</title>
+@section('title', 'Dashboard')
 
-        <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
-    </head>
-<body style="margin: 120px;">
+@section('content')
+
+    @include('partials.menu')
+
     Dashboard
 
     <section style="margin-top: 50px;">
@@ -61,8 +56,8 @@
         <h2>Create a New Class</h2>
         <form action="/create-class" method="POST">
             @csrf
-            
-            <input type="text" name="name" 
+
+            <input type="text" name="name"
                 placeholder="class name"
                 class="@error('name') is-invalid @enderror"
             />
@@ -124,8 +119,8 @@
         <h2>Create a New Room</h2>
         <form action="/create-room" method="POST">
             @csrf
-            
-            <input type="text" name="name" 
+
+            <input type="text" name="name"
                 placeholder="room name"
                 class="@error('name') is-invalid @enderror"
             />
@@ -145,7 +140,7 @@
             @foreach($teachers as $teacher)
                 <li style="display: flex; gap: 20px;">
                     <p>
-                        {{$teacher->user->name}} {{$teacher->user->surname}} 
+                        {{$teacher->user->name}} {{$teacher->user->surname}}
                         -
                         Room {{$teacher->default_room->name}}
                     </p>
@@ -156,46 +151,46 @@
                         <!--TODO: Error - when updating and error comes through all forms show it-->
                         @csrf
                         @method('PUT')
-            
-                        <input type="text" name="name" 
+
+                        <input type="text" name="name"
                             placeholder="teacher name"
                             value="{{$teacher->user->name}}"
                             class="@error('name') is-invalid @enderror"
                         />
-            
+
                         @error('name')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
-                        
-                        <input type="text" name="surname" 
+
+                        <input type="text" name="surname"
                             placeholder="teacher surname"
                             value="{{$teacher->user->surname}}"
                             class="@error('name') is-invalid @enderror"
                         />
-            
+
                         @error('surname')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
-                        
-                        <input type="email" name="email" 
+
+                        <input type="email" name="email"
                             placeholder="teacher email"
                             value="{{$teacher->user->email}}"
                             class="@error('email') is-invalid @enderror"
                         />
-            
+
                         @error('email')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
-                        
-                        <input type="password" name="password" 
+
+                        <input type="password" name="password"
                             placeholder="only insert password for update"
                             class="@error('password') is-invalid @enderror"
                         />
-            
+
                         @error('password')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
-            
+
                         <select name="default_room">
                             @foreach($rooms as $room)
                                 <option value="{{$room->id}}" @if($teacher->default_room->id == $room->id) selected @endif >
@@ -221,68 +216,13 @@
         </ul>
     </section>
 
-    @can('create-teachers')
-    <section style="margin-top: 50px;">
-        <h2>Create a New Teacher</h2>
-        <form action="/create-teacher" method="POST">
-            @csrf
-            
-            <input type="text" name="name" 
-                placeholder="teacher name"
-                class="@error('name') is-invalid @enderror"
-            />
-
-            @error('name')
-                <div class="alert alert-danger">{{ $message }}</div>
-            @enderror
-            
-            <input type="text" name="surname" 
-                placeholder="teacher surname"
-                class="@error('name') is-invalid @enderror"
-            />
-
-            @error('surname')
-                <div class="alert alert-danger">{{ $message }}</div>
-            @enderror
-            
-            <input type="email" name="email" 
-                placeholder="teacher email"
-                class="@error('email') is-invalid @enderror"
-            />
-
-            @error('email')
-                <div class="alert alert-danger">{{ $message }}</div>
-            @enderror
-            
-            <input type="password" name="password" 
-                placeholder="temporary password"
-                class="@error('password') is-invalid @enderror"
-            />
-
-            @error('password')
-                <div class="alert alert-danger">{{ $message }}</div>
-            @enderror
-
-            <select name="default_room">
-                @foreach($rooms as $room)
-                    <option value="{{$room->id}}">
-                        {{$room->name}}
-                    </option>
-                @endforeach
-            </select>
-
-            <button>Save teacher</button>
-        </form>
-    </section>
-    @endcan
-
     <section style="margin-top: 150px;">
         <h2>All Students</h2>
         <ul>
             @foreach($students as $student)
                 <li style="display: flex; gap: 20px;">
                     <p>
-                        {{$student->user->name}} {{$student->user->surname}} 
+                        {{$student->user->name}} {{$student->user->surname}}
                         -
                         Class {{$student->class->name}}
                     </p>
@@ -293,46 +233,46 @@
                         <!--TODO: Error - when updating and error comes through all forms show it-->
                         @csrf
                         @method('PUT')
-            
-                        <input type="text" name="name" 
+
+                        <input type="text" name="name"
                             placeholder="student name"
                             value="{{$student->user->name}}"
                             class="@error('name') is-invalid @enderror"
                         />
-            
+
                         @error('name')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
-                        
-                        <input type="text" name="surname" 
+
+                        <input type="text" name="surname"
                             placeholder="student surname"
                             value="{{$student->user->surname}}"
                             class="@error('name') is-invalid @enderror"
                         />
-            
+
                         @error('surname')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
-                        
-                        <input type="email" name="email" 
+
+                        <input type="email" name="email"
                             placeholder="student email"
                             value="{{$student->user->email}}"
                             class="@error('email') is-invalid @enderror"
                         />
-            
+
                         @error('email')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
-                        
-                        <input type="password" name="password" 
+
+                        <input type="password" name="password"
                             placeholder="only insert password for update"
                             class="@error('password') is-invalid @enderror"
                         />
-            
+
                         @error('password')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
-            
+
                         <select name="class">
                             @foreach($classes as $class)
                                 <option value="{{$class->id}}" @if($student->class->id == $class->id) selected @endif >
@@ -379,46 +319,46 @@
                                     <!--TODO: Error - when updating and error comes through all forms show it-->
                                     @csrf
                                     @method('PUT')
-                        
-                                    <input type="text" name="name" 
+
+                                    <input type="text" name="name"
                                         placeholder="student name"
                                         value="{{$student->user->name}}"
                                         class="@error('name') is-invalid @enderror"
                                     />
-                        
+
                                     @error('name')
                                         <div class="alert alert-danger">{{ $message }}</div>
                                     @enderror
-                                    
-                                    <input type="text" name="surname" 
+
+                                    <input type="text" name="surname"
                                         placeholder="student surname"
                                         value="{{$student->user->surname}}"
                                         class="@error('name') is-invalid @enderror"
                                     />
-                        
+
                                     @error('surname')
                                         <div class="alert alert-danger">{{ $message }}</div>
                                     @enderror
-                                    
-                                    <input type="email" name="email" 
+
+                                    <input type="email" name="email"
                                         placeholder="student email"
                                         value="{{$student->user->email}}"
                                         class="@error('email') is-invalid @enderror"
                                     />
-                        
+
                                     @error('email')
                                         <div class="alert alert-danger">{{ $message }}</div>
                                     @enderror
-                                    
-                                    <input type="password" name="password" 
+
+                                    <input type="password" name="password"
                                         placeholder="only insert password for update"
                                         class="@error('password') is-invalid @enderror"
                                     />
-                        
+
                                     @error('password')
                                         <div class="alert alert-danger">{{ $message }}</div>
                                     @enderror
-                        
+
                                     <select name="class">
                                         @foreach($classes as $class)
                                             <option value="{{$class->id}}" @if($student->class->id == $class->id) selected @endif >
@@ -448,63 +388,6 @@
         </ul>
     </section>
 
-    @can('create-students')
-    <section style="margin-top: 50px;">
-        <h2>Create a New Student</h2>
-        <form action="/create-student" method="POST">
-            @csrf
-            
-            <input type="text" name="name" 
-                placeholder="student name"
-                class="@error('name') is-invalid @enderror"
-            />
-
-            @error('name')
-                <div class="alert alert-danger">{{ $message }}</div>
-            @enderror
-            
-            <input type="text" name="surname" 
-                placeholder="student surname"
-                class="@error('name') is-invalid @enderror"
-            />
-
-            @error('surname')
-                <div class="alert alert-danger">{{ $message }}</div>
-            @enderror
-            
-            <input type="email" name="email" 
-                placeholder="student email"
-                class="@error('email') is-invalid @enderror"
-            />
-
-            @error('email')
-                <div class="alert alert-danger">{{ $message }}</div>
-            @enderror
-            
-            <input type="password" name="password" 
-                placeholder="temporary password"
-                class="@error('password') is-invalid @enderror"
-            />
-
-            @error('password')
-                <div class="alert alert-danger">{{ $message }}</div>
-            @enderror
-
-            <select name="class">
-                @foreach($classes as $class)
-                    <option value="{{$class->id}}">
-                        {{$class->name}}
-                    </option>
-                @endforeach
-            </select>
-
-            <button>Save student</button>
-        </form>
-    </section>
-    @endcan
-
-
-
     <section style="margin-top: 150px;">
         <h2>All subjects</h2>
         <ul>
@@ -522,17 +405,17 @@
                         <!--TODO: Error - when updating and error comes through all forms show it-->
                         @csrf
                         @method('PUT')
-            
-                        <input type="text" name="name" 
+
+                        <input type="text" name="name"
                             placeholder="subject name"
                             value="{{$subject->name}}"
                             class="@error('name') is-invalid @enderror"
                         />
-            
+
                         @error('name')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
-            
+
                         <select name="teacher_id">
                             @foreach($teachers as $teacher)
                                 <option value="{{$teacher->id}}" @if($subject->teacher->id == $teacher->id) selected @endif >
@@ -563,8 +446,8 @@
         <h2>Create a New Subject</h2>
         <form action="/create-subject" method="POST">
             @csrf
-            
-            <input type="text" name="name" 
+
+            <input type="text" name="name"
                 placeholder="subject name"
                 class="@error('name') is-invalid @enderror"
             />
@@ -609,17 +492,17 @@
                         <!--TODO: Error - when updating and error comes through all forms show it-->
                         @csrf
                         @method('PUT')
-            
-                        <input type="text" name="name" 
+
+                        <input type="text" name="name"
                             placeholder="assignment name"
                             value="{{$assignment->name}}"
                             class="@error('name') is-invalid @enderror"
                         />
-            
+
                         @error('name')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
-            
+
                         <select name="teacher_id">
                             @foreach($teachers as $teacher)
                                 <option value="{{$teacher->id}}" @if($assignment->teacher->id == $teacher->id) selected @endif >
@@ -627,7 +510,7 @@
                                 </option>
                             @endforeach
                         </select>
-            
+
                         <select name="subject_id">
                             @foreach($subjects as $subject)
                                 <option value="{{$subject->id}}" @if($assignment->subject->id == $subject->id) selected @endif >
@@ -635,7 +518,7 @@
                                 </option>
                             @endforeach
                         </select>
-            
+
                         <select name="class_id">
                             @foreach($classes as $class)
                                 <option value="{{$class->id}}" @if($assignment->class->id == $class->id) selected @endif >
@@ -666,8 +549,8 @@
         <h2>Create a New Assignment</h2>
         <form action="/create-assignment" method="POST">
             @csrf
-            
-            <input type="text" name="name" 
+
+            <input type="text" name="name"
                 placeholder="assignment name"
                 class="@error('name') is-invalid @enderror"
             />
@@ -722,7 +605,7 @@
                         <!--TODO: Error - when updating and error comes through all forms show it-->
                         @csrf
                         @method('PUT')
-            
+
                         <select name="assignment_id">
                             @foreach($assignments as $assignment)
                                 <option value="{{$assignment->id}}" @if($grade->assignment->id == $assignment->id) selected @endif >
@@ -730,7 +613,7 @@
                                 </option>
                             @endforeach
                         </select>
-            
+
                         <select name="student_id">
                             @foreach($students as $student)
                                 <option value="{{$student->id}}" @if($grade->student->id == $student->id) selected @endif >
@@ -738,7 +621,7 @@
                                 </option>
                             @endforeach
                         </select>
-            
+
                         <select name="value">
                             @foreach($grade_values as $value)
                                 <option value="{{$value}}" @if($grade->value == $value->value) selected @endif >
@@ -769,7 +652,7 @@
         <h2>Create a New Grade</h2>
         <form action="/create-grade" method="POST">
             @csrf
-            
+
             <select name="assignment_id">
                 @foreach($assignments as $assignment)
                     <option value="{{$assignment->id}}">
@@ -798,5 +681,4 @@
         </form>
     </section>
     @endcan
-</body>
-</html>
+@endsection
