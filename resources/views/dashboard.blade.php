@@ -4,9 +4,13 @@
 
 @section('content')
 
-    @include('partials.menu')
+@include('partials.menu')
 
-    Dashboard
+<div class="py-16 px-4 md:px-16">
+
+    <h1 class="text-2xl text-gray-900 text-center">
+        Dashboard
+    </h1>
 
     <section style="margin-top: 50px;">
         <h2>All Classes</h2>
@@ -19,7 +23,7 @@
 
                     @can('edit-classes')
                     -
-                    <form action="/edit-class/{{$class->id}}" method="POST">
+                    <form class="block w-full" action="/edit-class/{{$class->id}}" method="POST">
                         <!--TODO: Error - when updating and error comes through all forms show it-->
                         @csrf
                         @method('PUT')
@@ -27,23 +31,27 @@
                         <input type="text" name="name"
                             placeholder="class name"
                             value="{{$class->name}}"
-                            class="@error('name') is-invalid @enderror"
+                            class="@error('name') is-invalid @enderror simple-input"
                         />
 
                         @error('name')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
 
-                        <button>Update</button>
+                        <button class="std-btn">Update</button>
                     </form>
                     @endcan
 
                     @can('delete-classes')
                     -
-                    <form action="/delete-class/{{$class->id}}" method="POST">
+                    <form class="block w-full" action="/delete-class/{{$class->id}}" method="POST">
                         @csrf
                         @method('DELETE')
-                        <button>Delete</button>
+                        <button class="std-btn">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="w-4 h-4 fill-white">
+                                <path d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z"/>
+                            </svg>
+                        </button>
                     </form>
                     @endcan
                 </li>
@@ -54,19 +62,19 @@
     @can('create-classes')
     <section style="margin-top: 50px;">
         <h2>Create a New Class</h2>
-        <form action="/create-class" method="POST">
+        <form class="block w-full" action="/create-class" method="POST">
             @csrf
 
             <input type="text" name="name"
                 placeholder="class name"
-                class="@error('name') is-invalid @enderror"
+                class="@error('name') is-invalid @enderror simple-input"
             />
 
             @error('name')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
 
-            <button>Save class</button>
+            <button class="std-btn">Save class</button>
         </form>
     </section>
     @endcan
@@ -82,7 +90,7 @@
 
                     @can('edit-rooms')
                     -
-                    <form action="/edit-room/{{$room->id}}" method="POST">
+                    <form class="block w-full" action="/edit-room/{{$room->id}}" method="POST">
                         <!--TODO: Error - when updating and error comes through all forms show it-->
                         @csrf
                         @method('PUT')
@@ -90,23 +98,27 @@
                         <input type="text" name="name"
                             placeholder="room name"
                             value="{{$room->name}}"
-                            class="@error('name') is-invalid @enderror"
+                            class="@error('name') is-invalid @enderror simple-input"
                         />
 
                         @error('name')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
 
-                        <button>Update</button>
+                        <button class="std-btn">Update</button>
                     </form>
                     @endcan
 
                     @can('delete-rooms')
                     -
-                    <form action="/delete-room/{{$room->id}}" method="POST">
+                    <form class="block w-full" action="/delete-room/{{$room->id}}" method="POST">
                         @csrf
                         @method('DELETE')
-                        <button>Delete</button>
+                        <button class="std-btn">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="w-4 h-4 fill-white">
+                                <path d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z"/>
+                            </svg>
+                        </button>
                     </form>
                     @endcan
                 </li>
@@ -117,19 +129,19 @@
     @can('create-rooms')
     <section style="margin-top: 50px;">
         <h2>Create a New Room</h2>
-        <form action="/create-room" method="POST">
+        <form class="block w-full" action="/create-room" method="POST">
             @csrf
 
             <input type="text" name="name"
                 placeholder="room name"
-                class="@error('name') is-invalid @enderror"
+                class="@error('name') is-invalid @enderror simple-input"
             />
 
             @error('name')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
 
-            <button>Save room</button>
+            <button class="std-btn">Save room</button>
         </form>
     </section>
     @endcan
@@ -147,7 +159,7 @@
 
                     @can('edit-teachers')
                     -
-                    <form action="/edit-teacher/{{$teacher->id}}" method="POST">
+                    <form class="block w-full" action="/edit-teacher/{{$teacher->id}}" method="POST">
                         <!--TODO: Error - when updating and error comes through all forms show it-->
                         @csrf
                         @method('PUT')
@@ -155,7 +167,7 @@
                         <input type="text" name="name"
                             placeholder="teacher name"
                             value="{{$teacher->user->name}}"
-                            class="@error('name') is-invalid @enderror"
+                            class="@error('name') is-invalid @enderror simple-input"
                         />
 
                         @error('name')
@@ -165,7 +177,7 @@
                         <input type="text" name="surname"
                             placeholder="teacher surname"
                             value="{{$teacher->user->surname}}"
-                            class="@error('name') is-invalid @enderror"
+                            class="@error('name') is-invalid @enderror simple-input"
                         />
 
                         @error('surname')
@@ -175,7 +187,7 @@
                         <input type="email" name="email"
                             placeholder="teacher email"
                             value="{{$teacher->user->email}}"
-                            class="@error('email') is-invalid @enderror"
+                            class="@error('email') is-invalid @enderror simple-input"
                         />
 
                         @error('email')
@@ -184,14 +196,14 @@
 
                         <input type="password" name="password"
                             placeholder="only insert password for update"
-                            class="@error('password') is-invalid @enderror"
+                            class="@error('password') is-invalid @enderror simple-input"
                         />
 
                         @error('password')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
 
-                        <select name="default_room">
+                        <select class="simple-input" name="default_room">
                             @foreach($rooms as $room)
                                 <option value="{{$room->id}}" @if($teacher->default_room->id == $room->id) selected @endif >
                                     {{$room->name}}
@@ -199,16 +211,20 @@
                             @endforeach
                         </select>
 
-                        <button>Update</button>
+                        <button class="std-btn">Update</button>
                     </form>
                     @endcan
 
                     @can('delete-teachers')
                     -
-                    <form action="/delete-teacher/{{$teacher->id}}" method="POST">
+                    <form class="block w-full" action="/delete-teacher/{{$teacher->id}}" method="POST">
                         @csrf
                         @method('DELETE')
-                        <button>Delete</button>
+                        <button class="std-btn">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="w-4 h-4 fill-white">
+                                <path d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z"/>
+                            </svg>
+                        </button>
                     </form>
                     @endcan
                 </li>
@@ -229,7 +245,7 @@
 
                     @can('edit-students')
                     -
-                    <form action="/edit-student/{{$student->id}}" method="POST">
+                    <form class="block w-full" action="/edit-student/{{$student->id}}" method="POST">
                         <!--TODO: Error - when updating and error comes through all forms show it-->
                         @csrf
                         @method('PUT')
@@ -237,7 +253,7 @@
                         <input type="text" name="name"
                             placeholder="student name"
                             value="{{$student->user->name}}"
-                            class="@error('name') is-invalid @enderror"
+                            class="@error('name') is-invalid @enderror simple-input"
                         />
 
                         @error('name')
@@ -247,7 +263,7 @@
                         <input type="text" name="surname"
                             placeholder="student surname"
                             value="{{$student->user->surname}}"
-                            class="@error('name') is-invalid @enderror"
+                            class="@error('name') is-invalid @enderror simple-input"
                         />
 
                         @error('surname')
@@ -257,7 +273,7 @@
                         <input type="email" name="email"
                             placeholder="student email"
                             value="{{$student->user->email}}"
-                            class="@error('email') is-invalid @enderror"
+                            class="@error('email') is-invalid @enderror simple-input"
                         />
 
                         @error('email')
@@ -266,14 +282,14 @@
 
                         <input type="password" name="password"
                             placeholder="only insert password for update"
-                            class="@error('password') is-invalid @enderror"
+                            class="@error('password') is-invalid @enderror simple-input"
                         />
 
                         @error('password')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
 
-                        <select name="class">
+                        <select class="simple-input" name="class">
                             @foreach($classes as $class)
                                 <option value="{{$class->id}}" @if($student->class->id == $class->id) selected @endif >
                                     {{$class->name}}
@@ -281,16 +297,20 @@
                             @endforeach
                         </select>
 
-                        <button>Update</button>
+                        <button class="std-btn">Update</button>
                     </form>
                     @endcan
 
                     @can('delete-students')
                     -
-                    <form action="/delete-student/{{$student->id}}" method="POST">
+                    <form class="block w-full" action="/delete-student/{{$student->id}}" method="POST">
                         @csrf
                         @method('DELETE')
-                        <button>Delete</button>
+                        <button class="std-btn">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="w-4 h-4 fill-white">
+                                <path d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z"/>
+                            </svg>
+                        </button>
                     </form>
                     @endcan
                 </li>
@@ -315,7 +335,7 @@
 
                                 @can('edit-students')
                                 -
-                                <form action="/edit-student/{{$student->id}}" method="POST">
+                                <form class="block w-full" action="/edit-student/{{$student->id}}" method="POST">
                                     <!--TODO: Error - when updating and error comes through all forms show it-->
                                     @csrf
                                     @method('PUT')
@@ -323,7 +343,7 @@
                                     <input type="text" name="name"
                                         placeholder="student name"
                                         value="{{$student->user->name}}"
-                                        class="@error('name') is-invalid @enderror"
+                                        class="@error('name') is-invalid @enderror simple-input"
                                     />
 
                                     @error('name')
@@ -333,7 +353,7 @@
                                     <input type="text" name="surname"
                                         placeholder="student surname"
                                         value="{{$student->user->surname}}"
-                                        class="@error('name') is-invalid @enderror"
+                                        class="@error('name') is-invalid @enderror simple-input"
                                     />
 
                                     @error('surname')
@@ -343,7 +363,7 @@
                                     <input type="email" name="email"
                                         placeholder="student email"
                                         value="{{$student->user->email}}"
-                                        class="@error('email') is-invalid @enderror"
+                                        class="@error('email') is-invalid @enderror simple-input"
                                     />
 
                                     @error('email')
@@ -352,14 +372,14 @@
 
                                     <input type="password" name="password"
                                         placeholder="only insert password for update"
-                                        class="@error('password') is-invalid @enderror"
+                                        class="@error('password') is-invalid @enderror simple-input"
                                     />
 
                                     @error('password')
                                         <div class="alert alert-danger">{{ $message }}</div>
                                     @enderror
 
-                                    <select name="class">
+                                    <select class="simple-input" name="class">
                                         @foreach($classes as $class)
                                             <option value="{{$class->id}}" @if($student->class->id == $class->id) selected @endif >
                                                 {{$class->name}}
@@ -367,16 +387,20 @@
                                         @endforeach
                                     </select>
 
-                                    <button>Update</button>
+                                    <button class="std-btn">Update</button>
                                 </form>
                                 @endcan
 
                                 @can('delete-students')
                                 -
-                                <form action="/delete-student/{{$student->id}}" method="POST">
+                                <form class="block w-full" action="/delete-student/{{$student->id}}" method="POST">
                                     @csrf
                                     @method('DELETE')
-                                    <button>Delete</button>
+                                   <button class="std-btn">
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="w-4 h-4 fill-white">
+                                            <path d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z"/>
+                                        </svg>
+                                    </button>
                                 </form>
                                 @endcan
                             </li>
@@ -401,7 +425,7 @@
 
                     @can('edit-subjects')
                     -
-                    <form action="/edit-subject/{{$subject->id}}" method="POST">
+                    <form class="block w-full" action="/edit-subject/{{$subject->id}}" method="POST">
                         <!--TODO: Error - when updating and error comes through all forms show it-->
                         @csrf
                         @method('PUT')
@@ -409,14 +433,14 @@
                         <input type="text" name="name"
                             placeholder="subject name"
                             value="{{$subject->name}}"
-                            class="@error('name') is-invalid @enderror"
+                            class="@error('name') is-invalid @enderror simple-input"
                         />
 
                         @error('name')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
 
-                        <select name="teacher_id">
+                        <select class="simple-input" name="teacher_id">
                             @foreach($teachers as $teacher)
                                 <option value="{{$teacher->id}}" @if($subject->teacher->id == $teacher->id) selected @endif >
                                     {{$teacher->user->name}}
@@ -424,16 +448,20 @@
                             @endforeach
                         </select>
 
-                        <button>Update</button>
+                        <button class="std-btn">Update</button>
                     </form>
                     @endcan
 
                     @can('delete-subjects')
                     -
-                    <form action="/delete-subject/{{$subject->id}}" method="POST">
+                    <form class="block w-full" action="/delete-subject/{{$subject->id}}" method="POST">
                         @csrf
                         @method('DELETE')
-                        <button>Delete</button>
+                        <button class="std-btn">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="w-4 h-4 fill-white">
+                                <path d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z"/>
+                            </svg>
+                        </button>
                     </form>
                     @endcan
                 </li>
@@ -444,19 +472,19 @@
     @can('create-subjects')
     <section style="margin-top: 50px;">
         <h2>Create a New Subject</h2>
-        <form action="/create-subject" method="POST">
+        <form class="block w-full" action="/create-subject" method="POST">
             @csrf
 
             <input type="text" name="name"
                 placeholder="subject name"
-                class="@error('name') is-invalid @enderror"
+                class="@error('name') is-invalid @enderror simple-input"
             />
 
             @error('name')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
 
-            <select name="teacher_id">
+            <select class="simple-input" name="teacher_id">
                 @foreach($teachers as $teacher)
                     <option value="{{$teacher->id}}">
                         {{$teacher->user->name}}
@@ -464,7 +492,7 @@
                 @endforeach
             </select>
 
-            <button>Save subject</button>
+            <button class="std-btn">Save subject</button>
         </form>
     </section>
     @endcan
@@ -488,7 +516,7 @@
 
                     @can('edit-assignments')
                     -
-                    <form action="/edit-assignment/{{$assignment->id}}" method="POST">
+                    <form class="block w-full" action="/edit-assignment/{{$assignment->id}}" method="POST">
                         <!--TODO: Error - when updating and error comes through all forms show it-->
                         @csrf
                         @method('PUT')
@@ -496,14 +524,14 @@
                         <input type="text" name="name"
                             placeholder="assignment name"
                             value="{{$assignment->name}}"
-                            class="@error('name') is-invalid @enderror"
+                            class="@error('name') is-invalid @enderror simple-input"
                         />
 
                         @error('name')
                             <div class="alert alert-danger">{{ $message }}</div>
                         @enderror
 
-                        <select name="teacher_id">
+                        <select class="simple-input" name="teacher_id">
                             @foreach($teachers as $teacher)
                                 <option value="{{$teacher->id}}" @if($assignment->teacher->id == $teacher->id) selected @endif >
                                     {{$teacher->user->name}}
@@ -511,7 +539,7 @@
                             @endforeach
                         </select>
 
-                        <select name="subject_id">
+                        <select class="simple-input" name="subject_id">
                             @foreach($subjects as $subject)
                                 <option value="{{$subject->id}}" @if($assignment->subject->id == $subject->id) selected @endif >
                                     {{$subject->name}}
@@ -519,7 +547,7 @@
                             @endforeach
                         </select>
 
-                        <select name="class_id">
+                        <select class="simple-input" name="class_id">
                             @foreach($classes as $class)
                                 <option value="{{$class->id}}" @if($assignment->class->id == $class->id) selected @endif >
                                     {{$class->name}}
@@ -527,16 +555,20 @@
                             @endforeach
                         </select>
 
-                        <button>Update</button>
+                        <button class="std-btn">Update</button>
                     </form>
                     @endcan
 
                     @can('delete-assignments')
                     -
-                    <form action="/delete-assignment/{{$assignment->id}}" method="POST">
+                    <form class="block w-full" action="/delete-assignment/{{$assignment->id}}" method="POST">
                         @csrf
                         @method('DELETE')
-                        <button>Delete</button>
+                       <button class="std-btn">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="w-4 h-4 fill-white">
+                                <path d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z"/>
+                            </svg>
+                        </button>
                     </form>
                     @endcan
                 </li>
@@ -547,19 +579,19 @@
     @can('create-assignments')
     <section style="margin-top: 50px;">
         <h2>Create a New Assignment</h2>
-        <form action="/create-assignment" method="POST">
+        <form class="block w-full" action="/create-assignment" method="POST">
             @csrf
 
             <input type="text" name="name"
                 placeholder="assignment name"
-                class="@error('name') is-invalid @enderror"
+                class="@error('name') is-invalid @enderror simple-input"
             />
 
             @error('name')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
 
-            <select name="teacher_id">
+            <select class="simple-input" name="teacher_id">
                 @foreach($teachers as $teacher)
                     <option value="{{$teacher->id}}">
                         {{$teacher->user->name}}
@@ -567,7 +599,7 @@
                 @endforeach
             </select>
 
-            <select name="subject_id">
+            <select class="simple-input" name="subject_id">
                 @foreach($subjects as $subject)
                     <option value="{{$subject->id}}">
                         {{$subject->name}}
@@ -575,7 +607,7 @@
                 @endforeach
             </select>
 
-            <select name="class_id">
+            <select class="simple-input" name="class_id">
                 @foreach($classes as $class)
                     <option value="{{$class->id}}">
                         {{$class->name}}
@@ -583,7 +615,7 @@
                 @endforeach
             </select>
 
-            <button>Save assignment</button>
+            <button class="std-btn">Save assignment</button>
         </form>
     </section>
     @endcan
@@ -601,12 +633,12 @@
 
                     @can('edit-grades')
                     -
-                    <form action="/edit-grade/{{$grade->id}}" method="POST">
+                    <form class="block w-full" action="/edit-grade/{{$grade->id}}" method="POST">
                         <!--TODO: Error - when updating and error comes through all forms show it-->
                         @csrf
                         @method('PUT')
 
-                        <select name="assignment_id">
+                        <select class="simple-input" name="assignment_id">
                             @foreach($assignments as $assignment)
                                 <option value="{{$assignment->id}}" @if($grade->assignment->id == $assignment->id) selected @endif >
                                     {{$assignment->name}}
@@ -614,7 +646,7 @@
                             @endforeach
                         </select>
 
-                        <select name="student_id">
+                        <select class="simple-input" name="student_id">
                             @foreach($students as $student)
                                 <option value="{{$student->id}}" @if($grade->student->id == $student->id) selected @endif >
                                     {{$student->user->name}}
@@ -622,7 +654,7 @@
                             @endforeach
                         </select>
 
-                        <select name="value">
+                        <select class="simple-input" name="value">
                             @foreach($grade_values as $value)
                                 <option value="{{$value}}" @if($grade->value == $value->value) selected @endif >
                                     {{$value}}
@@ -630,16 +662,20 @@
                             @endforeach
                         </select>
 
-                        <button>Update</button>
+                        <button class="std-btn">Update</button>
                     </form>
                     @endcan
 
                     @can('delete-grades')
                     -
-                    <form action="/delete-grade/{{$grade->id}}" method="POST">
+                    <form class="block w-full" action="/delete-grade/{{$grade->id}}" method="POST">
                         @csrf
                         @method('DELETE')
-                        <button>Delete</button>
+                         <button class="std-btn">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="w-4 h-4 fill-white">
+                                <path d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z"/>
+                            </svg>
+                        </button>
                     </form>
                     @endcan
                 </li>
@@ -650,10 +686,10 @@
     @can('create-grades')
     <section style="margin-top: 50px;">
         <h2>Create a New Grade</h2>
-        <form action="/create-grade" method="POST">
+        <form class="block w-full" action="/create-grade" method="POST">
             @csrf
 
-            <select name="assignment_id">
+            <select class="simple-input" name="assignment_id">
                 @foreach($assignments as $assignment)
                     <option value="{{$assignment->id}}">
                         {{$assignment->name}}
@@ -661,15 +697,15 @@
                 @endforeach
             </select>
 
-            <select name="student_id">
+            <select class="simple-input" name="student_id">
                 @foreach($students as $student)
                     <option value="{{$student->id}}">
                         {{$student->user->name}}
                     </option>
                 @endforeach
             </select>
-
-            <select name="value">
+            <!--TODO: Select don't have the invalid attribute-->
+            <select class="simple-input" name="value">
                 @foreach($grade_values as $value)
                     <option value="{{$value}}">
                         {{$value}}
@@ -677,8 +713,9 @@
                 @endforeach
             </select>
 
-            <button>Save grades</button>
+            <button class="std-btn">Save grades</button>
         </form>
     </section>
     @endcan
+</div>
 @endsection
