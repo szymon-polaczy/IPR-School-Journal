@@ -18,3 +18,11 @@
 .std-btn {
     @apply block rounded-md bg-blue-500 text-white text-lg p-2 hover:bg-blue-700 transition-all;
 }
+
+.tab {
+    @apply h-0 overflow-hidden;
+}
+
+.tab.active {
+    @apply h-auto;
+}

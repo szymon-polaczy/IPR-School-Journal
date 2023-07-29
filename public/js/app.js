@@ -11,3 +11,15 @@ if (btn_create_users_popup_close) {
         document.querySelector('#create-user-form').classList.remove('opened-popup');
     });
 }
+
+//-----------------
+
+document.querySelectorAll('.main-tab-btn').forEach((btn) => {
+    btn.addEventListener('click', (event) => {
+        document.querySelectorAll('.tab').forEach((tab) => tab.classList.remove('active'));
+
+        const tab = event.currentTarget.getAttribute('data-tab');
+        document.querySelector(`#tab-${tab}`).classList.add('active');
+
+    });
+});
