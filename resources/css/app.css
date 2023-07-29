@@ -1,3 +1,20 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.opened-popup {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.simple-input {
+    @apply border-gray-300 border-b-2 p-1 hover:border-gray-500 transition-all w-full bg-white;
+}
+
+.simple-input.is-invalid {
+    @apply border-red-300 hover:border-red-500;
+}
+
+.std-btn {
+    @apply block rounded-md bg-blue-500 text-white text-lg p-2 hover:bg-blue-700 transition-all;
+}

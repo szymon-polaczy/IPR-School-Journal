@@ -23,8 +23,7 @@
 
         <div class="form-group mb-3">
             <input type="text" placeholder="Email" id="email"
-                class="form-control border-gray-300 border-b-2 p-1
-                hover:border-gray-500 transition-all"
+                class="simple-input"
                 name="email" required autofocus>
             @if ($errors->has('email'))
             <span class="text-danger">{{ $errors->first('email') }}</span>
@@ -33,8 +32,7 @@
 
         <div class="form-group mb-3">
             <input type="password" placeholder="Password" id="password"
-                class="form-control border-gray-300 border-b-2 p-1
-                hover:border-gray-500 transition-all"
+                class="simple-input"
                 name="password" required>
             @if ($errors->has('password'))
             <span class="text-danger">{{ $errors->first('password') }}</span>
@@ -50,8 +48,7 @@
         </div>
 
         <div class="d-grid mx-auto">
-            <button type="submit" class="d-block rounded-md bg-blue-500
-                    text-white text-lg p-2 hover:bg-blue-700 transition-all"
+            <button type="submit" class="std-btn"
             >
                 Signin
             </button>

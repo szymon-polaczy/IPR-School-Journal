@@ -1,16 +1,27 @@
-<form action="/create-user" method="POST"
+<form action="/create-user" method="POST" id="create-user-form"
     class="fixed top-1/2 left-1/2 transform bg-white p-8 rounded-lg
            -translate-x-1/2 -translate-y-1/2 shadow-2xl shadow-grey-900
-           flex align-middle justify-center flex-col gap-4 max-w-sm"
+           flex align-middle justify-center flex-col gap-4 max-w-sm
+           opacity-0 pointer-events-none"
 >
     @csrf
+
+    <button id="btn-create-user-popup-close" class="absolute top-4 right-4"
+        type="button"
+    >
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"
+            class="w-6 h-6"
+        >
+            <path d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"/>
+        </svg>
+    </button>
 
     <h2 class="text-2xl text-gray-900 text-center">
        Create user
     </h2>
 
     <div>
-        <select name="user_type">
+        <select name="user_type" class="simple-input">
             <option>student</option>
             <option>teacher</option>
             <option>admin</option>
@@ -25,7 +36,7 @@
     <div>
         <input type="text" name="name"
             placeholder="Tomek"
-            class="@error('name') is-invalid @enderror"
+            class="@error('name') is-invalid @enderror simple-input"
         />
 
         @error('name')
@@ -37,7 +48,7 @@
     <div>
         <input type="text" name="surname"
             placeholder="Nowak"
-            class="@error('surname') is-invalid @enderror"
+            class="@error('surname') is-invalid @enderror simple-input"
         />
 
         @error('surname')
@@ -49,7 +60,7 @@
     <div>
         <input type="email" name="email"
             placeholder="email@domain.com"
-            class="@error('email') is-invalid @enderror"
+            class="@error('email') is-invalid @enderror simple-input"
         />
 
         @error('email')
@@ -61,7 +72,7 @@
     <div>
         <input type="password" name="password"
             placeholder="very secure password"
-            class="@error('password') is-invalid @enderror"
+            class="@error('password') is-invalid @enderror simple-input"
         />
 
         @error('password')
@@ -71,7 +82,7 @@
 
     <!--teacher-->
     <div>
-        <select name="default_room">
+        <select name="default_room" class="simple-input @error('default_room') is-invalid @enderror">
             @foreach($rooms as $room)
                 <option value="{{ $room->id }}">
                     {{ $room->name }}
@@ -86,7 +97,7 @@
 
     <!--student-->
     <div>
-        <select name="class">
+        <select name="class" class="simple-input @error('class') is-invalid @enderror">
             @foreach($classes as $class)
                 <option value="{{ $class->id }}">
                     {{ $class->name }}
@@ -99,8 +110,7 @@
         @enderror
     </div>
 
-    <button type="submit" class="d-block rounded-md bg-blue-500 text-white
-            text-lg p-2 hover:bg-blue-700 transition-all"
+    <button type="submit" class="std-btn mt-4"
     >
         Submit
     </button>
