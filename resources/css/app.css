@@ -19,10 +19,15 @@
     @apply block rounded-md bg-blue-500 text-white text-lg p-2 hover:bg-blue-700 transition-all;
 }
 
-.tab {
+.tab, .tab-inside {
     @apply h-0 overflow-hidden;
 }
 
-.tab.active {
+.tab.active, .tab-inside.active {
     @apply h-auto;
+}
+
+.user-table-names {
+    transform: translate(-56px, -85px) rotate(50deg);
+    max-width: 20px;
 }

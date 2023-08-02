@@ -23,3 +23,14 @@ document.querySelectorAll('.main-tab-btn').forEach((btn) => {
 
     });
 });
+
+
+document.querySelectorAll('.main-tab-btn-inside').forEach((btn) => {
+    btn.addEventListener('click', (event) => {
+        document.querySelectorAll('.tab-inside').forEach((tab) => tab.classList.remove('active'));
+
+        const tab = event.currentTarget.getAttribute('data-tab');
+        document.querySelector(`#tab-${tab}`).classList.add('active');
+
+    });
+});

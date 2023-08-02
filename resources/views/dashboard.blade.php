@@ -10,26 +10,29 @@
     <!--TODO: Mobile version has to be added-->
     <main class="grid grid-cols-12 gap-4">
         <nav class="col-start-1 col-end-2">
-            <button class="main-tab-btn" data-tab="classes">
+            <button class="main-tab-btn block" data-tab="classes">
                 Classes
             </button>
-            <button class="main-tab-btn" data-tab="rooms">
+            <button class="main-tab-btn block" data-tab="rooms">
                 Rooms
             </button>
-            <button class="main-tab-btn" data-tab="teachers">
+            <button class="main-tab-btn block" data-tab="teachers">
                 Teachers
             </button>
-            <button class="main-tab-btn" data-tab="students">
+            <button class="main-tab-btn block" data-tab="students">
                 Students
             </button>
-            <button class="main-tab-btn" data-tab="subjects">
+            <button class="main-tab-btn block" data-tab="subjects">
                 Subjects
             </button>
-            <button class="main-tab-btn" data-tab="assignments">
+            <button class="main-tab-btn block" data-tab="assignments">
                 Assignments
             </button>
-            <button class="main-tab-btn" data-tab="grades">
+            <button class="main-tab-btn block" data-tab="grades">
                 Grades
+            </button>
+            <button class="main-tab-btn block" data-tab="class-subject-grade">
+                Everything
             </button>
         </nav>
         <section class="col-start-3 col-end-13">
@@ -53,6 +56,9 @@
             </section>
             <section id="tab-grades" class="tab">
                 @include('partials.grades')
+            </section>
+            <section id="tab-class-subject-grade" class="tab">
+                @include('partials.class-subject-grade')
             </section>
         </section>
     </main>
