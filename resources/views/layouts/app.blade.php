@@ -15,5 +15,6 @@
 <body class="antialiased">
     @yield('content')
     <script src="{{ url('/js/app.js') }}" defer></script>
+    @stack('scripts')
 </body>
 </html>

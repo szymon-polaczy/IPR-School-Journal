@@ -6,6 +6,7 @@ use App\Enums\GradeEnums;
 use App\Models\Assignment;
 use App\Models\ClassModel;
 use App\Models\Grade;
+use App\Models\Lesson;
 use App\Models\Room;
 use App\Models\Student;
 use App\Models\Subject;
@@ -34,6 +35,10 @@ class DatabaseSeeder extends Seeder
 
         $admin->assignRole('Admin');
 
+        $room = Room::create(array(
+                'name' => 'gym',
+            ));
+
         $teacher = Teacher::create(array(
             'user_id' => User::create(array(
                 'name' => 'tim',
@@ -41,9 +46,7 @@ class DatabaseSeeder extends Seeder
                 'email' => 'teacher@email.com',
                 'password' => Hash::make('password'),
             ))->assignRole('Teacher')->id,
-            'default_room_id' => Room::create(array(
-                'name' => 'gym',
-            ))->id,
+            'default_room_id' => $room->id,
         ));
 
         $subject = Subject::create(array(
@@ -76,6 +79,16 @@ class DatabaseSeeder extends Seeder
             'value' => GradeEnums::Five_Minus,
             'student_id' => $student->id,
             'assignment_id' => $assignment->id,
+        ));
+
+        $lesson = Lesson::create(array(
+            'title' => $subject->name . ' ' . $class->name,
+            'teacher_id' => $teacher->id,
+            'subject_id' => $subject->id,
+            'class_id' => $class->id,
+            'room_id' => $room->id,
+            'start' => date('Y-m-d') . ' 8:00:00',
+            'end' => date('Y-m-d') . ' 8:45:00',
         ));
     }
 }

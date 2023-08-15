@@ -11,6 +11,7 @@ use App\Http\Controllers\TeacherController;
 use App\Models\Assignment;
 use App\Models\ClassModel;
 use App\Models\Grade;
+use App\Models\Lesson;
 use App\Models\Room;
 use App\Models\Student;
 use App\Models\Subject;
@@ -45,6 +46,7 @@ Route::get('/dashboard', function () {
         'assignments' => Assignment::all(),
         'grades' => Grade::all(),
         'grade_values' => GradeEnums::cases(),
+        'lessons' => Lesson::all(),
     ]);
 })->name('dashboard')->middleware('auth');
 
