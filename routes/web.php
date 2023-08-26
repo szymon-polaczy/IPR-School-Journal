@@ -4,6 +4,7 @@ use App\Enums\GradeEnums;
 use App\Http\Controllers\AssignmentController;
 use App\Http\Controllers\ClassController;
 use App\Http\Controllers\GradeController;
+use App\Http\Controllers\LessonController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\SubjectController;
@@ -87,6 +88,10 @@ Route::delete('/delete-assignment/{assignment}', [AssignmentController::class, '
 Route::post('/create-grade', [GradeController::class, 'createGrade'])->middleware('can:create-grades');
 Route::put('/edit-grade/{grade}', [GradeController::class, 'editGrade'])->middleware('can:edit-grades');
 Route::delete('/delete-grade/{grade}', [GradeController::class, 'deleteGrade'])->middleware('can:delete-grades');
+
+Route::post('/create-lesson', [LessonController::class, 'createLesson'])->middleware('can:create-lessons');
+Route::put('/edit-lesson/{lesson}', [LessonController::class, 'editLesson'])->middleware('can:edit-lessons');
+Route::delete('/delete-lesson/{lesson}', [LessonController::class, 'deleteLesson'])->middleware('can:delete-lessons');
 
 Route::post('/create-user', function(Request $request) {
     $incomingFields = $request->validate([
