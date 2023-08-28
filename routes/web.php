@@ -47,7 +47,10 @@ Route::get('/dashboard', function () {
         'assignments' => Assignment::all(),
         'grades' => Grade::all(),
         'grade_values' => GradeEnums::cases(),
-        'lessons' => Lesson::all(),
+        'lessons' => collect(Lesson::all())->map(function( $lesson ) {
+            $lesson['url'] = json_encode($lesson);//hacky work around
+            return $lesson;
+        }),
     ]);
 })->name('dashboard')->middleware('auth');
 

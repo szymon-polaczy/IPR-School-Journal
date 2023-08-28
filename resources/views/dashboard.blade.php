@@ -173,6 +173,11 @@
                     slotMinTime: '7:00:00',
                     slotMaxTime: '18:00:00',
                     events: @json($lessons),
+                    eventDidMount: function(data) {
+                        const lesson = data.el.getAttribute('href');
+                        data.el.removeAttribute('href');
+                        data.el.setAttribute('data-lesson', lesson);
+                    }
                 });
                 calendar.render();
             });
