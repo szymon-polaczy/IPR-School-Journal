@@ -53,7 +53,7 @@ Route::get('/dashboard', function () {
 
 
 Route::post('login', [\App\Http\Controllers\LoginController::class, 'authenticate'])->name('login');
-
+Route::get('logout', [\App\Http\Controllers\LoginController::class, 'logout'])->name('logout');
 
 Route::post('/create-class', [ClassController::class, 'createClass'])->middleware('can:create-classes');
 Route::put('/edit-class/{class}', [ClassController::class, 'editClass'])->middleware('can:edit-classes');
