@@ -10,7 +10,6 @@
                     @can('edit-grades')
                     -
                     <form class="block w-full" action="/edit-grade/{{$grade->id}}" method="POST">
-                        <!--TODO: Error - when updating and error comes through all forms show it-->
                         @csrf
                         @method('PUT')
 
@@ -80,7 +79,7 @@
                     </option>
                 @endforeach
             </select>
-            <!--TODO: Select don't have the invalid attribute-->
+
             <select class="simple-input" name="value">
                 @foreach($grade_values as $value)
                     <option value="{{$value}}">

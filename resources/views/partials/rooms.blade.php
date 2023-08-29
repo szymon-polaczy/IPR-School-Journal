@@ -10,19 +10,14 @@
                     @can('edit-rooms')
                     -
                     <form class="block w-full" action="/edit-room/{{$room->id}}" method="POST">
-                        <!--TODO: Error - when updating and error comes through all forms show it-->
                         @csrf
                         @method('PUT')
 
                         <input type="text" name="name"
                             placeholder="room name"
                             value="{{$room->name}}"
-                            class="@error('name') is-invalid @enderror simple-input"
+                            class="simple-input"
                         />
-
-                        @error('name')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
 
                         <button class="std-btn">Update</button>
                     </form>
@@ -53,12 +48,8 @@
 
             <input type="text" name="name"
                 placeholder="room name"
-                class="@error('name') is-invalid @enderror simple-input"
+                class="simple-input"
             />
-
-            @error('name')
-                <div class="alert alert-danger">{{ $message }}</div>
-            @enderror
 
             <button class="std-btn">Save room</button>
         </form>

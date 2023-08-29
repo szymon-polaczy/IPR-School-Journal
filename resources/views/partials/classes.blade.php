@@ -10,19 +10,14 @@
                     @can('edit-classes')
                     -
                     <form class="block w-full" action="/edit-class/{{$class->id}}" method="POST">
-                        <!--TODO: Error - when updating and error comes through all forms show it-->
                         @csrf
                         @method('PUT')
 
                         <input type="text" name="name"
                             placeholder="class name"
                             value="{{$class->name}}"
-                            class="@error('name') is-invalid @enderror simple-input"
+                            class="simple-input"
                         />
-
-                        @error('name')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
 
                         <button class="std-btn">Update</button>
                     </form>
@@ -53,12 +48,8 @@
 
             <input type="text" name="name"
                 placeholder="class name"
-                class="@error('name') is-invalid @enderror simple-input"
+                class="simple-input"
             />
-
-            @error('name')
-                <div class="alert alert-danger">{{ $message }}</div>
-            @enderror
 
             <button class="std-btn">Save class</button>
         </form>

@@ -36,6 +36,14 @@
                 </button>
             </nav>
             <section class="col-start-3 col-end-13">
+                @if (!empty($errors->all()))
+                    <section class="error-wrapper">
+                        @foreach($errors->all() as $error)
+                            <div>{{ $error }}</div>
+                        @endforeach
+                    </section>
+                @endif
+
                 <section id="tab-classes" class="tab">
                     @include('partials.classes')
                 </section>
@@ -76,88 +84,62 @@
                 @endforeach
             </select>
 
-            @error('teacher_id')
-            <div class="alert alert-danger">{{ $message }}</div>
-        @enderror
+            <select class="simple-input" name="subject_id">
+                @foreach($subjects as $subject)
+                    <option value="{{$subject->id}}">
+                    {{$subject->name}}
+                    </option>
+                @endforeach
+            </select>
 
-        <select class="simple-input" name="subject_id">
-            @foreach($subjects as $subject)
-                <option value="{{$subject->id}}">
-                {{$subject->name}}
-                </option>
-            @endforeach
-        </select>
+            <select class="simple-input" name="class_id">
+                @foreach($classes as $class)
+                    <option value="{{$class->id}}">
+                    {{$class->name}}
+                    </option>
+                @endforeach
+            </select>
 
-        @error('subject_id')
-        <div class="alert alert-danger">{{ $message }}</div>
-    @enderror
+            <select class="simple-input" name="room_id">
+                @foreach($rooms as $room)
+                    <option value="{{$room->id}}">
+                    {{$room->name}}
+                    </option>
+                @endforeach
+            </select>
 
-    <select class="simple-input" name="class_id">
-        @foreach($classes as $class)
-            <option value="{{$class->id}}">
-            {{$class->name}}
-            </option>
-        @endforeach
-    </select>
+            <select class="simple-input" name="weekday">
+                <option value="1">Monday</option>
+                <option value="2">Tuesday</option>
+                <option value="3">Wednesday</option>
+                <option value="4">Thursday</option>
+                <option value="5">Friday</option>
+                <option value="6">Saturday</option>
+                <option value="7">Sunday</option>
+            </select>
 
-    @error('class_id')
-    <div class="alert alert-danger">{{ $message }}</div>
-@enderror
+            <label for="end_repeat_time">End repeat time:</label>
+            <input
+                    type="date"
+                    id="end_repeat_time"
+                    name="end_repeat_time"
+                    />
 
-<select class="simple-input" name="room_id">
-    @foreach($rooms as $room)
-        <option value="{{$room->id}}">
-        {{$room->name}}
-        </option>
-    @endforeach
-</select>
-
-@error('room_id')
-<div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
-
-                        <select class="simple-input" name="weekday">
-                            <option value="1">Monday</option>
-                            <option value="2">Tuesday</option>
-                            <option value="3">Wednesday</option>
-                            <option value="4">Thursday</option>
-                            <option value="5">Friday</option>
-                            <option value="6">Saturday</option>
-                            <option value="7">Sunday</option>
-                        </select>
-
-                        @error('weekday')
-                        <div class="alert alert-danger">{{ $message }}</div>
-                    @enderror
-
-                    <label for="end_repeat_time">End repeat time:</label>
-                    <input
-                            type="date"
-                            id="end_repeat_time"
-                            name="end_repeat_time"
-                            />
-
-                    @error('end_repeat_time')
-                    <div class="alert alert-danger">{{ $message }}</div>
-                @enderror
-
-                <label for="start_time">Start hours:</label>
-                <input type="time" id="start_time" name="start_time"
-                                                   min="09:00" max="18:00" required/>
-
-                @error('start_time')
-                <div class="alert alert-danger">{{ $message }}</div>
-            @enderror/>
+            <label for="start_time">Start hours:</label>
+            <input type="time"
+                   id="start_time"
+                   name="start_time"
+                   min="09:00" max="18:00" required
+                   />
 
             <label for="end_time">End hours:</label>
-            <input type="time" id="end_time" name="end_time"
-                                             min="09:00" max="18:00" required />
+            <input type="time"
+                   id="end_time"
+                   name="end_time"
+                   min="09:00" max="18:00" required
+                   />
 
-            @error('end_time')
-            <div class="alert alert-danger">{{ $message }}</div>
-        @enderror
-
-        <button class="std-btn">Update</button>
+            <button class="std-btn">Update</button>
         </form>
     </section>
 

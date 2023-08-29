@@ -23,12 +23,8 @@
                         <input type="text" name="name"
                             placeholder="assignment name"
                             value="{{$assignment->name}}"
-                            class="@error('name') is-invalid @enderror simple-input"
+                            class="simple-input"
                         />
-
-                        @error('name')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
 
                         <select class="simple-input" name="teacher_id">
                             @foreach($teachers as $teacher)
@@ -83,12 +79,8 @@
 
             <input type="text" name="name"
                 placeholder="assignment name"
-                class="@error('name') is-invalid @enderror simple-input"
+                class="simple-input"
             />
-
-            @error('name')
-                <div class="alert alert-danger">{{ $message }}</div>
-            @enderror
 
             <select class="simple-input" name="teacher_id">
                 @foreach($teachers as $teacher)

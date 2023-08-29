@@ -25,14 +25,14 @@ class SubjectController extends Controller
 
     public function createSubject(Request $request) {
         $incomingFields = $request->validate([
-            'name' => 'required',
+            'name' => 'required|unique:subject',
             'teacher_id' => array('required', 'integer'),
         ]);
 
         $incomingFields['name'] = strip_tags($incomingFields['name']);
 
         Subject::create($incomingFields);
-        
+
         return redirect('dashboard');
     }
 }

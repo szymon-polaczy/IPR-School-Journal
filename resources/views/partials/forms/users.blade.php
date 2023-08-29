@@ -26,88 +26,60 @@
             <option>teacher</option>
             <option>admin</option>
         </select>
-
-        @error('user_type')
-            <div class="alert alert-danger">{{ $message }}</div>
-        @enderror
     </div>
 
 
     <div>
         <input type="text" name="name"
             placeholder="Tomek"
-            class="@error('name') is-invalid @enderror simple-input"
+            class="simple-input"
         />
-
-        @error('name')
-            <div class="alert alert-danger">{{ $message }}</div>
-        @enderror
     </div>
 
 
     <div>
         <input type="text" name="surname"
             placeholder="Nowak"
-            class="@error('surname') is-invalid @enderror simple-input"
+            class="simple-input"
         />
-
-        @error('surname')
-            <div class="alert alert-danger">{{ $message }}</div>
-        @enderror
     </div>
 
 
     <div>
         <input type="email" name="email"
             placeholder="email@domain.com"
-            class="@error('email') is-invalid @enderror simple-input"
+            class="simple-input"
         />
-
-        @error('email')
-            <div class="alert alert-danger">{{ $message }}</div>
-        @enderror
     </div>
 
 
     <div>
         <input type="password" name="password"
             placeholder="very secure password"
-            class="@error('password') is-invalid @enderror simple-input"
+            class="simple-input"
         />
-
-        @error('password')
-            <div class="alert alert-danger">{{ $message }}</div>
-        @enderror
     </div>
 
     <!--teacher-->
     <div>
-        <select name="default_room" class="simple-input @error('default_room') is-invalid @enderror">
+        <select name="default_room" class="simple-input">
             @foreach($rooms as $room)
                 <option value="{{ $room->id }}">
                     {{ $room->name }}
                 </option>
             @endforeach
         </select>
-
-        @error('default_room')
-            <div class="alert alert-danger">{{ $message }}</div>
-        @enderror
     </div>
 
     <!--student-->
     <div>
-        <select name="class" class="simple-input @error('class') is-invalid @enderror">
+        <select name="class" class="simple-input">
             @foreach($classes as $class)
                 <option value="{{ $class->id }}">
                     {{ $class->name }}
                 </option>
             @endforeach
         </select>
-
-        @error('class')
-            <div class="alert alert-danger">{{ $message }}</div>
-        @enderror
     </div>
 
     <button type="submit" class="std-btn mt-4"

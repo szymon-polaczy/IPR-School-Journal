@@ -1,73 +1,60 @@
 <section>
-        <h2>All Teachers</h2>
-        <ul>
-            @foreach($teachers as $teacher)
-                <li style="display: flex; gap: 20px;">
-                    <p>
-                        {{$teacher->user->name}} {{$teacher->user->surname}}
-                        -
-                        Room {{$teacher->default_room->name}}
-                    </p>
+    <h2>All Teachers</h2>
+    <ul>
+        @foreach($teachers as $teacher)
+            <li style="display: flex; gap: 20px;">
+                <p>
+                {{$teacher->user->name}} {{$teacher->user->surname}}
+                -
+                Room {{$teacher->default_room->name}}
+                </p>
 
-                    @can('edit-teachers')
+                @can('edit-teachers')
                     -
                     <form class="block w-full" action="/edit-teacher/{{$teacher->id}}" method="POST">
-                        <!--TODO: Error - when updating and error comes through all forms show it-->
                         @csrf
                         @method('PUT')
 
-                        <input type="text" name="name"
-                            placeholder="teacher name"
-                            value="{{$teacher->user->name}}"
-                            class="@error('name') is-invalid @enderror simple-input"
-                        />
+                        <input type="text"
+                               name="name"
+                               placeholder="teacher name"
+                               value="{{$teacher->user->name}}"
+                               class="simple-input"
+                               />
 
-                        @error('name')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
+                        <input type="text"
+                               name="surname"
+                               placeholder="teacher surname"
+                               value="{{$teacher->user->surname}}"
+                               class="simple-input"
+                               />
 
-                        <input type="text" name="surname"
-                            placeholder="teacher surname"
-                            value="{{$teacher->user->surname}}"
-                            class="@error('name') is-invalid @enderror simple-input"
-                        />
+                        <input type="email"
+                               name="email"
+                               placeholder="teacher email"
+                               value="{{$teacher->user->email}}"
+                               class="simple-input"
+                               />
 
-                        @error('surname')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
-
-                        <input type="email" name="email"
-                            placeholder="teacher email"
-                            value="{{$teacher->user->email}}"
-                            class="@error('email') is-invalid @enderror simple-input"
-                        />
-
-                        @error('email')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
-
-                        <input type="password" name="password"
-                            placeholder="only insert password for update"
-                            class="@error('password') is-invalid @enderror simple-input"
-                        />
-
-                        @error('password')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
+                        <input type="password"
+                               name="password"
+                               placeholder="only insert password for update"
+                               class="simple-input"
+                               />
 
                         <select class="simple-input" name="default_room">
                             @foreach($rooms as $room)
                                 <option value="{{$room->id}}" @if($teacher->default_room->id == $room->id) selected @endif >
-                                    {{$room->name}}
+                                     {{$room->name}}
                                 </option>
                             @endforeach
                         </select>
 
                         <button class="std-btn">Update</button>
                     </form>
-                    @endcan
+                @endcan
 
-                    @can('delete-teachers')
+                @can('delete-teachers')
                     -
                     <form class="block w-full" action="/delete-teacher/{{$teacher->id}}" method="POST">
                         @csrf
@@ -78,8 +65,8 @@
                             </svg>
                         </button>
                     </form>
-                    @endcan
-                </li>
-            @endforeach
-        </ul>
-    </section>
+                @endcan
+            </li>
+        @endforeach
+    </ul>
+</section>

@@ -12,48 +12,31 @@
                     @can('edit-students')
                     -
                     <form class="block w-full" action="/edit-student/{{$student->id}}" method="POST">
-                        <!--TODO: Error - when updating and error comes through all forms show it-->
                         @csrf
                         @method('PUT')
 
                         <input type="text" name="name"
                             placeholder="student name"
                             value="{{$student->user->name}}"
-                            class="@error('name') is-invalid @enderror simple-input"
+                            class="simple-input"
                         />
-
-                        @error('name')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
 
                         <input type="text" name="surname"
                             placeholder="student surname"
                             value="{{$student->user->surname}}"
-                            class="@error('name') is-invalid @enderror simple-input"
+                            class="simple-input"
                         />
-
-                        @error('surname')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
 
                         <input type="email" name="email"
                             placeholder="student email"
                             value="{{$student->user->email}}"
-                            class="@error('email') is-invalid @enderror simple-input"
+                            class="simple-input"
                         />
-
-                        @error('email')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
 
                         <input type="password" name="password"
                             placeholder="only insert password for update"
-                            class="@error('password') is-invalid @enderror simple-input"
+                            class="simple-input"
                         />
-
-                        @error('password')
-                            <div class="alert alert-danger">{{ $message }}</div>
-                        @enderror
 
                         <select class="simple-input" name="class">
                             @foreach($classes as $class)
@@ -102,48 +85,31 @@
                                 @can('edit-students')
                                 -
                                 <form class="block w-full" action="/edit-student/{{$student->id}}" method="POST">
-                                    <!--TODO: Error - when updating and error comes through all forms show it-->
                                     @csrf
                                     @method('PUT')
 
                                     <input type="text" name="name"
                                         placeholder="student name"
                                         value="{{$student->user->name}}"
-                                        class="@error('name') is-invalid @enderror simple-input"
+                                        class="simple-input"
                                     />
-
-                                    @error('name')
-                                        <div class="alert alert-danger">{{ $message }}</div>
-                                    @enderror
 
                                     <input type="text" name="surname"
                                         placeholder="student surname"
                                         value="{{$student->user->surname}}"
-                                        class="@error('name') is-invalid @enderror simple-input"
+                                        class="simple-input"
                                     />
-
-                                    @error('surname')
-                                        <div class="alert alert-danger">{{ $message }}</div>
-                                    @enderror
 
                                     <input type="email" name="email"
                                         placeholder="student email"
                                         value="{{$student->user->email}}"
-                                        class="@error('email') is-invalid @enderror simple-input"
+                                        class="simple-input"
                                     />
-
-                                    @error('email')
-                                        <div class="alert alert-danger">{{ $message }}</div>
-                                    @enderror
 
                                     <input type="password" name="password"
                                         placeholder="only insert password for update"
-                                        class="@error('password') is-invalid @enderror simple-input"
+                                        class="simple-input"
                                     />
-
-                                    @error('password')
-                                        <div class="alert alert-danger">{{ $message }}</div>
-                                    @enderror
 
                                     <select class="simple-input" name="class">
                                         @foreach($classes as $class)

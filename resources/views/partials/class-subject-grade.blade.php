@@ -27,24 +27,24 @@
                         </thead>
 
                         <tbody>
-                    @foreach($assignments as $assignment)
-                        @if ($assignment->subject->id == $subject->id && $assignment->class->id === $class->id)
-                            <tr>
-                                <td>{{$assignment->name}}</td>
+                            @foreach($assignments as $assignment)
+                                @if ($assignment->subject->id == $subject->id && $assignment->class->id === $class->id)
+                                    <tr>
+                                        <td>{{$assignment->name}}</td>
 
-                                @foreach($students as $student)
-                                    {{$student->name}}
-                                    @if ($student->grade)
-                                        @if($student->grade->assignment->id === $assignment->id)
-                                            <td>
-                                                {{$student->grade->value}}
-                                            </td>
-                                        @endif
-                                    @endif
-                                @endforeach
-                            </tr>
-                        @endif
-                    @endforeach
+                                        @foreach($students as $student)
+                                            {{$student->name}}
+                                            @if ($student->grade)
+                                                @if($student->grade->assignment->id === $assignment->id)
+                                                    <td>
+                                                        {{$student->grade->value}}
+                                                    </td>
+                                                @endif
+                                            @endif
+                                        @endforeach
+                                    </tr>
+                                @endif
+                            @endforeach
                         </tbody>
                     </table>
                 </article>
