@@ -10,7 +10,17 @@ use Illuminate\Support\Facades\DB;
 class LessonController extends Controller
 {
     public function editLesson(Lesson $lesson, Request $request) {
-        //todo: editing lessons - teacher, subject, start_time, end_time, weekday, no repeatin, edit only one lesson, room, no class editing
+        $incomingFields = $request->validate([
+            'subject_id' => array('required', 'integer'),
+            'teacher_id' => array('required', 'integer'),
+            'room_id' => array('required', 'integer'),
+            'start' => array('required'),
+            'end' => array('required'),
+        ]);
+
+        $lesson->update($incomingFields);
+
+        return redirect('dashboard');
     }
 
     public function deleteLesson(Lesson $lesson) {

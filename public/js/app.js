@@ -14,7 +14,7 @@ if (btn_create_users_popup_close) {
 
 //-----------------
 
-document.addEventListener('DOMContentLoaded', () => {
+const lesson_clicking = () => {
     const events = document.querySelectorAll(".fc-event");
     if (events) {
         events.forEach(lesson => {
@@ -24,10 +24,30 @@ document.addEventListener('DOMContentLoaded', () => {
                 const lesson_obj = JSON.parse(lesson.getAttribute('data-lesson'));
 
                 document.querySelector('#delete-lesson-btn').setAttribute('action', `/delete-lesson/${lesson_obj.id}`);
+                document.querySelector('#lesson-popup #edit-lesson').setAttribute('action', `/edit-lesson/${lesson_obj.id}`);
+
+                document.querySelector('#lesson-popup #teacher_id').value = lesson_obj.teacher_id;
+                document.querySelector('#lesson-popup #subject_id').value = lesson_obj.subject_id;
+                document.querySelector('#lesson-popup #room_id').value = lesson_obj.room_id;
+                document.querySelector('#lesson-popup #start').value = lesson_obj.start;
+                document.querySelector('#lesson-popup #end').value = lesson_obj.end;
             });
         });
     }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    lesson_clicking();
+
+    document.querySelector('.fc-prev-button').addEventListener('click', () => {
+        lesson_clicking();
+    });
+
+    document.querySelector('.fc-next-button').addEventListener('click', () => {
+        lesson_clicking();
+    });
 });
+
 
 const btn_lesson_popup_close = document.querySelector('#btn-lesson-popup-close');
 if (btn_lesson_popup_close) {

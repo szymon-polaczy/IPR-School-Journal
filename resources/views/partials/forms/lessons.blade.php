@@ -1,5 +1,5 @@
 <section id="lesson-popup"
-    class="fixed top-1/2 left-1/2 transform bg-white p-8 rounded-lg
+    class="fixed top-1/2 left-1/2 transform bg-white p-8 pt-16 rounded-lg
            -translate-x-1/2 -translate-y-1/2 shadow-2xl shadow-grey-900
            flex align-middle justify-center flex-col gap-4 max-w-sm
            opacity-0 pointer-events-none"
@@ -27,10 +27,11 @@
         </button>
     </form>
 
-<form class="block w-full" action="/edit-lesson" method="POST">
+<form class="block w-full" action="/edit-lesson" method="POST" id="edit-lesson">
     @csrf
+    @method('PUT')
 
-    <select class="simple-input" name="teacher_id">
+    <select class="simple-input" name="teacher_id" id="teacher_id">
         @foreach($teachers as $teacher)
             <option value="{{$teacher->id}}">
             {{$teacher->user->name}}
@@ -42,7 +43,7 @@
     <div class="alert alert-danger">{{ $message }}</div>
 @enderror
 
-<select class="simple-input" name="subject_id">
+<select class="simple-input" name="subject_id" id="subject_id">
     @foreach($subjects as $subject)
         <option value="{{$subject->id}}">
         {{$subject->name}}
@@ -54,7 +55,7 @@
 <div class="alert alert-danger">{{ $message }}</div>
     @enderror
 
-    <select class="simple-input" name="room_id">
+    <select class="simple-input" name="room_id" id="room_id">
         @foreach($rooms as $room)
             <option value="{{$room->id}}">
             {{$room->name}}
