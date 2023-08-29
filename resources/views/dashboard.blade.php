@@ -37,7 +37,9 @@
             </nav>
             <section class="col-start-3 col-end-13">
                 @if (!empty($errors->all()))
-                    <section class="error-wrapper">
+                    <section class="error-wrapper rounded-2xl bg-red-200 mb-8
+                        flex flex-col gap-2 text-center p-3 text-red-800"
+                    >
                         @foreach($errors->all() as $error)
                             <div>{{ $error }}</div>
                         @endforeach
