@@ -14,6 +14,29 @@ if (btn_create_users_popup_close) {
 
 //-----------------
 
+const btns_edit_subjects_popup = document.querySelectorAll('.open-edit-subject');
+if (btns_edit_subjects_popup) {
+    btns_edit_subjects_popup.forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.querySelector('#edit-subject-popup').classList.add('opened-popup');
+
+            const subject_obj = JSON.parse(btn.getAttribute('data-subject'));
+
+            document.querySelector('#edit-subject').setAttribute('action', `/edit-subject/${subject_obj.id}`);
+            document.querySelector('#edit-subject-popup input[name="name"]').value = subject_obj.name;
+            document.querySelector('#edit-subject-popup select[name="teacher_id"]').value = subject_obj.teacher_id;
+        });
+    });
+}
+
+const btn_edit_subjects_close_btn = document.querySelector('#btn-edit-subject-popup-close');
+if (btn_edit_subjects_close_btn) {
+    btn_edit_subjects_close_btn.addEventListener('click', () => {
+        document.querySelector('#edit-subject-popup').classList.remove('opened-popup');
+    });
+}
+
+//-----------------
 const lesson_clicking = () => {
     const events = document.querySelectorAll(".fc-event");
     if (events) {

@@ -16,7 +16,7 @@
 }
 
 .std-btn {
-    @apply block rounded-md bg-blue-500 text-white text-lg p-2 hover:bg-blue-700 transition-all;
+    @apply block rounded-md bg-blue-500 text-white text-lg p-2 hover:bg-blue-700 transition-all h-fit;
 }
 
 .tab, .tab-inside {
