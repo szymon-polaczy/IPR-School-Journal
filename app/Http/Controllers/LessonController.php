@@ -46,12 +46,15 @@ class LessonController extends Controller
         $incomingFields['title'] = sprintf('(%s) %s', $class->name, $subject->name);
 
         $currentDate = Carbon::now();
-        $currentDate->setTime($incomingFields['start_time'], 0, 0);//todo: fix minutes
+        $start_time_arr = preg_split("/:/", $incomingFields['start_time']);
+        $end_time_arr = preg_split("/:/", $incomingFields['end_time']);
+
+        $currentDate->setTime($start_time_arr[0], $start_time_arr[1], 0);
 
         while ($currentDate->isBefore($incomingFields['end_repeat_time'])) {
             if ($currentDate->dayOfWeekIso == $incomingFields['weekday']) {
                 $endDate = $currentDate->copy();
-                $endDate->setTime($incomingFields['end_time'], 0, 0);//todo: fix minutes
+                $endDate->setTime($end_time_arr[0], $end_time_arr[1], 0);
 
                 $incomingFields['start'] = $currentDate->toDateTimeString();
                 $incomingFields['end'] = $endDate->toDateTimeString();
