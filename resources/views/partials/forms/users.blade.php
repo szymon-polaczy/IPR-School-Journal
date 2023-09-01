@@ -2,7 +2,7 @@
     class="fixed top-1/2 left-1/2 transform bg-white p-8 rounded-lg
            -translate-x-1/2 -translate-y-1/2 shadow-2xl shadow-grey-900
            flex align-middle justify-center flex-col gap-4 max-w-sm
-           opacity-0 pointer-events-none"
+           opacity-0 pointer-events-none user-type-student"
 >
     @csrf
 
@@ -60,8 +60,7 @@
         />
     </div>
 
-    <!--teacher-->
-    <div>
+    <div class="teacher-only">
         <select name="default_room" class="simple-input">
             @foreach($rooms as $room)
                 <option value="{{ $room->id }}">
@@ -71,8 +70,7 @@
         </select>
     </div>
 
-    <!--student-->
-    <div>
+    <div class="student-only">
         <select name="class" class="simple-input">
             @foreach($classes as $class)
                 <option value="{{ $class->id }}">

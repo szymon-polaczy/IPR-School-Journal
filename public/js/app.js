@@ -101,3 +101,14 @@ document.querySelectorAll('.main-tab-btn-inside').forEach((btn) => {
 
     });
 });
+
+//-----------------
+
+const user_type_select = document.querySelector('#create-user-form select[name="user_type"]')
+user_type_select.addEventListener('change', () => {
+    document.querySelector('#create-user-form').classList.remove('user-type-teacher');
+    document.querySelector('#create-user-form').classList.remove('user-type-student');
+    document.querySelector('#create-user-form').classList.remove('user-type-admin');
+
+    document.querySelector('#create-user-form').classList.add(`user-type-${user_type_select.value}`);
+});

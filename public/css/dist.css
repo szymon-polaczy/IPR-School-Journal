@@ -879,6 +879,21 @@ video {
   max-width: 20px;
 }
 
+.user-type-student .admin-only,
+.user-type-teacher .admin-only {
+  display: none;
+}
+
+.user-type-admin .teacher-only,
+.user-type-student .teacher-only {
+  display: none;
+}
+
+.user-type-admin .student-only,
+.user-type-teacher .student-only {
+  display: none;
+}
+
 @media (min-width: 768px) {
   .md\:row-start-1 {
     grid-row-start: 1;
