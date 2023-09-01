@@ -38,20 +38,39 @@ Route::get('/', function () {
 
 
 Route::get('/dashboard', function () {
-    return view('dashboard', [
-        'classes' => ClassModel::all(),
-        'rooms' => Room::all(),
-        'teachers' => Teacher::all(),
-        'students' => Student::all(),
-        'subjects' => Subject::all(),
-        'assignments' => Assignment::all(),
-        'grades' => Grade::all(),
-        'grade_values' => GradeEnums::cases(),
-        'lessons' => collect(Lesson::all())->map(function( $lesson ) {
+    if ( auth()->user()->hasRole('Student') ) {
+        $student = auth()->user()->student;
+
+        $student->refresh();
+
+        return view('dashboard', [
+            'classes' => array( $student->class ),
+            'students' => array( $student ),
+            'subjects' => Subject::all(),
+            'assignments' => $student->assignments,
+            'grades' => Grade::all(),//TODO: this should go through the student but doesn't work with has many
+            'grade_values' => GradeEnums::cases(),
+            'lessons' => collect($student->lessons)->map(function( $lesson ) {
             $lesson['url'] = json_encode($lesson);//hacky work around
-            return $lesson;
-        }),
-    ]);
+               return $lesson;
+            }),
+        ]);
+    }
+
+    return view('dashboard', [
+            'classes' => ClassModel::all(),
+            'rooms' => Room::all(),
+            'teachers' => Teacher::all(),
+            'students' => Student::all(),
+            'subjects' => Subject::all(),
+            'assignments' => Assignment::all(),
+            'grades' => Grade::all(),
+            'grade_values' => GradeEnums::cases(),
+            'lessons' => collect(Lesson::all())->map(function( $lesson ) {
+                $lesson['url'] = json_encode($lesson);//hacky work around
+                return $lesson;
+            }),
+        ]);
 })->name('dashboard')->middleware('auth');
 
 

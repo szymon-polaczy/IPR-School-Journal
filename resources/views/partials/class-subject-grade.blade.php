@@ -8,21 +8,27 @@
     @endforeach
 
     @foreach($classes as $class)
-        <section id="tab-class-{{$class->id}}" class="tab-inside mt-6">
+        <section id="tab-class-{{$class->id}}" class="tab-inside">
             @foreach($subjects as $subject)
-                <article>
+                <article class="mt-6">
                     <h3>{{$subject->name}}</h3>
 
-                    <table class="mt-32">
+                    @if(is_countable($students) && count($students) > 1)
+                    <table class="mt-28">
+                    @else
+                    <table class="mt-6">
+                    @endif
                         <thead>
                             <tr>
                                 <th>Assignment</th>
 
-                                @foreach($students as $student)
-                                    <th class="user-table-names">
-                                        {{$student->user->name}}&nbsp;{{$student->user->surname}}
-                                    </th>
-                                @endforeach
+                                @if(is_countable($students) && count($students) > 1)
+                                    @foreach($students as $student)
+                                        <th class="user-table-names">
+                                            {{$student->user->name}}&nbsp;{{$student->user->surname}}
+                                        </th>
+                                    @endforeach
+                                @endif
                             </tr>
                         </thead>
 
@@ -33,7 +39,6 @@
                                         <td>{{$assignment->name}}</td>
 
                                         @foreach($students as $student)
-                                            {{$student->name}}
                                             @if ($student->grade)
                                                 @if($student->grade->assignment->id === $assignment->id)
                                                     <td>

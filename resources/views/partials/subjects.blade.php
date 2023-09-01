@@ -1,6 +1,7 @@
 <section>
     <h2 class="mb-8">All subjects</h2>
     <ul class="flex flex-col gap-2">
+        @if(is_countable($subjects) && count($subjects))
         @foreach($subjects as $subject)
             <li style="display: flex; gap: 20px;">
                 <p class="w-full">
@@ -39,6 +40,7 @@
                 @endcan
             </li>
         @endforeach
+        @endif
     </ul>
 </section>
 

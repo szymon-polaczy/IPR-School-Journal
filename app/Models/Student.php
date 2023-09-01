@@ -5,12 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\HasOneOrMany;
+use Spatie\Permission\Traits\HasRoles;
 
 class Student extends Model
 {
-    use HasFactory;
+    use HasFactory, HasRoles;
 
     /**
      * The table associated with the model.
@@ -37,7 +37,15 @@ class Student extends Model
         return $this->belongsTo(ClassModel::class, 'class_id', 'id');
     }
 
-    public function grade(): BelongsTo {
-        return $this->belongsTo(Grade::class, 'id', 'student_id');
+    public function grades(): HasOneOrMany {
+        return $this->hasMany(Grade::class, 'id', 'student_id');
+    }
+
+    public function lessons(): HasOneOrMany {
+        return $this->hasMany(Lesson::class, 'class_id', 'class_id');
+    }
+
+    public function assignments(): HasOneOrMany {
+        return $this->hasMany(Assignment::class, 'class_id', 'class_id');
     }
 }

@@ -10,18 +10,20 @@
         <!--TODO: Mobile version has to be added-->
         <main class="grid grid-cols-12 gap-4">
             <nav class="col-start-1 col-end-2">
-                <button class="main-tab-btn block" data-tab="classes">
-                    Classes
-                </button>
-                <button class="main-tab-btn block" data-tab="rooms">
-                    Rooms
-                </button>
-                <button class="main-tab-btn block" data-tab="teachers">
-                    Teachers
-                </button>
-                <button class="main-tab-btn block" data-tab="students">
-                    Students
-                </button>
+                @if ( !auth()->user()->hasRole('Student') )
+                    <button class="main-tab-btn block" data-tab="classes">
+                        Classes
+                    </button>
+                    <button class="main-tab-btn block" data-tab="rooms">
+                        Rooms
+                    </button>
+                    <button class="main-tab-btn block" data-tab="teachers">
+                        Teachers
+                    </button>
+                    <button class="main-tab-btn block" data-tab="students">
+                        Students
+                    </button>
+                @endif
                 <button class="main-tab-btn block" data-tab="subjects">
                     Subjects
                 </button>
@@ -49,18 +51,20 @@
                     </section>
                 @endif
 
-                <section id="tab-classes" class="tab">
-                    @include('partials.classes')
-                </section>
-                <section id="tab-rooms" class="tab">
-                    @include('partials.rooms')
-                </section>
-                <section id="tab-teachers" class="tab">
-                    @include('partials.teachers')
-                </section>
-                <section id="tab-students" class="tab">
-                    @include('partials.students')
-                </section>
+                @if ( !auth()->user()->hasRole('Student') )
+                    <section id="tab-classes" class="tab">
+                        @include('partials.classes')
+                    </section>
+                    <section id="tab-rooms" class="tab">
+                        @include('partials.rooms')
+                    </section>
+                    <section id="tab-teachers" class="tab">
+                        @include('partials.teachers')
+                    </section>
+                    <section id="tab-students" class="tab">
+                        @include('partials.students')
+                    </section>
+                @endif
                 <section id="tab-subjects" class="tab">
                     @include('partials.subjects')
                 </section>
