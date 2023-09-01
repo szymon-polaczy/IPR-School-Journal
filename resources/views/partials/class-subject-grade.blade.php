@@ -2,13 +2,13 @@
     <h2>Everything at once only displaying for now</h2>
 
     @foreach($classes as $class)
-        <button class="main-tab-btn-inside" data-tab="class-{{$class->id}}">
+        <button class="main-tab-btn-inside mr-3" data-tab="class-{{$class->id}}">
             {{$class->name}}
         </button>
     @endforeach
 
     @foreach($classes as $class)
-        <section id="tab-class-{{$class->id}}" class="tab-inside">
+        <section id="tab-class-{{$class->id}}" class="tab-inside mt-6">
             @foreach($subjects as $subject)
                 <article>
                     <h3>{{$subject->name}}</h3>

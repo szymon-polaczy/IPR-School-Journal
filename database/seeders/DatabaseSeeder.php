@@ -37,7 +37,7 @@ class DatabaseSeeder extends Seeder
 
         $room = Room::create(array(
                 'name' => 'gym',
-            ));
+        ));
 
         $teacher = Teacher::create(array(
             'user_id' => User::create(array(

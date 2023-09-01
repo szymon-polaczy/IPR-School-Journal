@@ -46,3 +46,7 @@
 .user-type-teacher .student-only {
     display: none;
 }
+
+.main-tab-btn, .main-tab-btn-inside {
+    @apply text-blue-500 hover:underline;
+}
