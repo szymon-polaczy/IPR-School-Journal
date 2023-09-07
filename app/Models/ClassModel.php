@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOneOrMany;
 
 class ClassModel extends Model
 {
@@ -28,5 +29,9 @@ class ClassModel extends Model
 
     public function students(): HasMany {
         return $this->hasMany(Student::class, 'class_id', 'id');
+    }
+
+    public function subjects(): HasOneOrMany {
+        return $this->hasMany(Subject::class, 'class_id', 'id');
     }
 }

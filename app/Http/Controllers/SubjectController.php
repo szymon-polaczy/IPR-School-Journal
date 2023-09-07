@@ -11,6 +11,7 @@ class SubjectController extends Controller
         $incomingFields = $request->validate([
             'name' => 'required',
             'teacher_id' => array('required', 'integer'),
+            'class_id' => array('required', 'integer'),
         ]);
 
         $subject->update($incomingFields);
@@ -27,6 +28,7 @@ class SubjectController extends Controller
         $incomingFields = $request->validate([
             'name' => 'required|unique:subject',
             'teacher_id' => array('required', 'integer'),
+            'class_id' => array('required', 'integer'),
         ]);
 
         $incomingFields['name'] = strip_tags($incomingFields['name']);

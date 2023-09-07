@@ -49,13 +49,14 @@ class DatabaseSeeder extends Seeder
             'default_room_id' => $room->id,
         ));
 
+        $class = ClassModel::create(array(
+                'name' => '3TI',
+        ));
+
         $subject = Subject::create(array(
             'name' => 'gymnastics',
             'teacher_id' => $teacher->id,
-        ));
-
-        $class = ClassModel::create(array(
-                'name' => '3TI',
+            'class_id' => $class->id,
         ));
 
         $student = Student::create(array(
@@ -77,7 +78,7 @@ class DatabaseSeeder extends Seeder
 
         $grade = Grade::create(array(
             'value' => GradeEnums::Five_Minus,
-            'student_id' => $student->id,
+            'student_id' => $student->user->id,
             'assignment_id' => $assignment->id,
         ));
 

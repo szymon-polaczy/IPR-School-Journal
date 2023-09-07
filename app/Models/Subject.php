@@ -25,9 +25,14 @@ class Subject extends Model
     protected $fillable = [
         'name',
         'teacher_id',
+        'class_id',
     ];
 
     public function teacher(): BelongsTo {
         return $this->belongsTo(Teacher::class, 'teacher_id', 'id');
+    }
+
+    public function class(): BelongsTo {
+        return $this->belongsTo(ClassModel::class, 'class_id', 'id');
     }
 }

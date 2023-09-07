@@ -25,6 +25,7 @@ if (btns_edit_subjects_popup) {
             document.querySelector('#edit-subject').setAttribute('action', `/edit-subject/${subject_obj.id}`);
             document.querySelector('#edit-subject-popup input[name="name"]').value = subject_obj.name;
             document.querySelector('#edit-subject-popup select[name="teacher_id"]').value = subject_obj.teacher_id;
+            document.querySelector('#edit-subject-popup select[name="class_id"]').value = subject_obj.class_id;
         });
     });
 }

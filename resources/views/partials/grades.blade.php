@@ -23,7 +23,7 @@
 
                         <select class="simple-input" name="student_id">
                             @foreach($students as $student)
-                                <option value="{{$student->id}}" @if($grade->student->id == $student->id) selected @endif >
+                                <option value="{{$student->user->id}}" @if($grade->student->user->id == $student->user->id) selected @endif >
                                     {{$student->user->name}}
                                 </option>
                             @endforeach
@@ -74,7 +74,7 @@
 
             <select class="simple-input" name="student_id">
                 @foreach($students as $student)
-                    <option value="{{$student->id}}">
+                    <option value="{{$student->user->id}}">
                         {{$student->user->name}}
                     </option>
                 @endforeach

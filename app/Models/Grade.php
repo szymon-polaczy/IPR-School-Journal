@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 
 class Grade extends Model
 {
@@ -28,8 +29,8 @@ class Grade extends Model
         'assignment_id',
     ];
 
-    public function student(): BelongsTo {
-        return $this->belongsTo(Student::class, 'student_id', 'id');
+    public function student(): HasOneThrough {
+        return $this->hasOneThrough(Student::class, User::class, 'id', 'user_id', 'student_id', 'id');
     }
 
     public function assignment(): BelongsTo {

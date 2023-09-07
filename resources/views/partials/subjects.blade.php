@@ -16,7 +16,8 @@
                             array(
                                 'id' => $subject['id'],
                                 'name' => $subject['name'],
-                                'teacher_id' => $subject['teacher_id']
+                                'teacher_id' => $subject['teacher_id'],
+                                'class_id' => $subject['class_id']
                             )
                         )
                     }}"
@@ -77,8 +78,16 @@
 
                     <select class="simple-input" name="teacher_id">
                         @foreach($teachers as $teacher)
-                            <option value="{{$teacher->id}}" @if($subject->teacher->id == $teacher->id) selected @endif >
+                            <option value="{{$teacher->id}}">
                                 {{$teacher->user->name}}
+                            </option>
+                        @endforeach
+                    </select>
+
+                    <select class="simple-input" name="class_id">
+                        @foreach($classes as $class)
+                            <option value="{{$class->id}}">
+                                {{$class->name}}
                             </option>
                         @endforeach
                     </select>
@@ -103,6 +112,14 @@
             @foreach($teachers as $teacher)
                 <option value="{{$teacher->id}}">
                     {{$teacher->user->name}}
+                </option>
+            @endforeach
+        </select>
+
+        <select class="simple-input" name="class_id">
+            @foreach($classes as $class)
+                <option value="{{$class->id}}">
+                {{$class->name}}
                 </option>
             @endforeach
         </select>

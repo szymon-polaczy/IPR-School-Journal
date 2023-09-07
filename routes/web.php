@@ -41,14 +41,11 @@ Route::get('/dashboard', function () {
     if ( auth()->user()->hasRole('Student') ) {
         $student = auth()->user()->student;
 
-        $student->refresh();
-
         return view('dashboard', [
             'classes' => array( $student->class ),
             'students' => array( $student ),
-            'subjects' => Subject::all(),
+            'subjects' => $student->class->subjects,
             'assignments' => $student->assignments,
-            'grades' => Grade::all(),//TODO: this should go through the student but doesn't work with has many
             'grade_values' => GradeEnums::cases(),
             'lessons' => collect($student->lessons)->map(function( $lesson ) {
             $lesson['url'] = json_encode($lesson);//hacky work around

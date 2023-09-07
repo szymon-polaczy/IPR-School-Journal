@@ -9,46 +9,23 @@
 
     @foreach($classes as $class)
         <section id="tab-class-{{$class->id}}" class="tab-inside">
-            @foreach($subjects as $subject)
+            @foreach($class->subjects as $subject)
                 <article class="mt-6">
-                    <h3>{{$subject->name}}</h3>
+                    <h3><b>{{$subject->name}}</b></h3>
 
-                    @if(is_countable($students) && count($students) > 1)
-                    <table class="mt-28">
-                    @else
                     <table class="mt-6">
-                    @endif
-                        <thead>
-                            <tr>
-                                <th>Assignment</th>
-
-                                @if(is_countable($students) && count($students) > 1)
-                                    @foreach($students as $student)
-                                        <th class="user-table-names">
-                                            {{$student->user->name}}&nbsp;{{$student->user->surname}}
-                                        </th>
-                                    @endforeach
-                                @endif
-                            </tr>
-                        </thead>
-
                         <tbody>
-                            @foreach($assignments as $assignment)
-                                @if ($assignment->subject->id == $subject->id && $assignment->class->id === $class->id)
-                                    <tr>
-                                        <td>{{$assignment->name}}</td>
+                            @foreach($class->students as $student)
+                                <tr>
+                                    <td>{{ $student->user->name }}</td>
 
-                                        @foreach($students as $student)
-                                            @if ($student->grade)
-                                                @if($student->grade->assignment->id === $assignment->id)
-                                                    <td>
-                                                        {{$student->grade->value}}
-                                                    </td>
-                                                @endif
-                                            @endif
-                                        @endforeach
-                                    </tr>
-                                @endif
+                                    @foreach($student->grades as $grade)
+                                        <td>
+                                            <span>{{ $grade->value }}</span>
+                                            <div>{{ $grade->assignment->name }}</div>
+                                        </td>
+                                    @endforeach
+                                </tr>
                             @endforeach
                         </tbody>
                     </table>

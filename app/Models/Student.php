@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Database\Eloquent\Relations\HasOneOrMany;
 use Spatie\Permission\Traits\HasRoles;
 
@@ -37,8 +38,8 @@ class Student extends Model
         return $this->belongsTo(ClassModel::class, 'class_id', 'id');
     }
 
-    public function grades(): HasOneOrMany {
-        return $this->hasMany(Grade::class, 'id', 'student_id');
+    public function grades(): HasManyThrough {
+        return $this->hasManyThrough(Grade::class, User::class, 'id', 'student_id', 'user_id', 'id');
     }
 
     public function lessons(): HasOneOrMany {

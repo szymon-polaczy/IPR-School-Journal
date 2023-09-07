@@ -23,16 +23,16 @@
                     <button class="main-tab-btn block" data-tab="students">
                         Students
                     </button>
+                    <button class="main-tab-btn block" data-tab="subjects">
+                        Subjects
+                    </button>
+                    <button class="main-tab-btn block" data-tab="assignments">
+                        Assignments
+                    </button>
+                    <button class="main-tab-btn block" data-tab="grades">
+                        Grades
+                    </button>
                 @endif
-                <button class="main-tab-btn block" data-tab="subjects">
-                    Subjects
-                </button>
-                <button class="main-tab-btn block" data-tab="assignments">
-                    Assignments
-                </button>
-                <button class="main-tab-btn block" data-tab="grades">
-                    Grades
-                </button>
                 <button class="main-tab-btn block" data-tab="lessons">
                     Lessons
                 </button>
@@ -64,16 +64,16 @@
                     <section id="tab-students" class="tab">
                         @include('partials.students')
                     </section>
+                    <section id="tab-subjects" class="tab">
+                        @include('partials.subjects')
+                    </section>
+                    <section id="tab-assignments" class="tab">
+                        @include('partials.assignments')
+                    </section>
+                    <section id="tab-grades" class="tab">
+                        @include('partials.grades')
+                    </section>
                 @endif
-                <section id="tab-subjects" class="tab">
-                    @include('partials.subjects')
-                </section>
-                <section id="tab-assignments" class="tab">
-                    @include('partials.assignments')
-                </section>
-                <section id="tab-grades" class="tab">
-                    @include('partials.grades')
-                </section>
                 <section id="tab-lessons" class="tab">
                     @include('partials.lessons')
                 </section>
