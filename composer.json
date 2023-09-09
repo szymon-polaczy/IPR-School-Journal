@@ -32,6 +32,9 @@
         "psr-4": {
             "Tests\\": "tests/"
         }
+        "files": [
+            "tests/utilities/functions.php"
+        ]
     },
     "scripts": {
         "post-autoload-dump": [
