@@ -6,7 +6,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Tests\TestCase;
 
-class ExampleTest extends TestCase
+class AuthenticationTest extends TestCase
 {
     public function test_the_application_returns_a_successful_responsel() {
         //todo add factories to all models
