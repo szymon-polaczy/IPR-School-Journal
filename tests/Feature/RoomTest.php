@@ -63,9 +63,8 @@ class RoomTest extends TestCase
     }
 
     public function test_editing_a_class_not_logged_in() {
-        $rooms = Room::all();
         $new_name = $this->generateRandomString(10);
-        $room_id = $rooms[0]->id;
+        $room_id = collect(Room::first())->first();
 
         $response = $this->put('/edit-room/' . $room_id, [
             'name' => $new_name,
@@ -75,9 +74,8 @@ class RoomTest extends TestCase
     }
 
     public function test_editing_a_class_logged_in() {
-        $rooms = Room::all();
         $new_name = $this->generateRandomString(10);
-        $room_id = $rooms[0]->id;
+        $room_id = collect(Room::first())->first();
 
         $users = User::role('admin')->get();
         Auth::login($users[0]);
@@ -90,9 +88,8 @@ class RoomTest extends TestCase
     }
 
     public function test_editing_a_class_logged_in_too_long_name() {
-        $rooms = Room::all();
         $new_name = $this->generateRandomString(300);
-        $room_id = $rooms[0]->id;
+        $room_id = collect(Room::first())->first();
 
         $users = User::role('admin')->get();
         Auth::login($users[0]);
@@ -103,6 +100,45 @@ class RoomTest extends TestCase
 
         $response->assertSessionHasErrors(['name']);
         $response->assertStatus(302);
+    }
+
+
+    public function test_deleting_a_class_not_logged_in() {
+        $room_id = collect(Room::first())->first();
+
+        $number_of_rooms = count(Room::all());
+
+        $response = $this->delete('/delete-room/' . $room_id);
+
+        $response->assertStatus(403);
+
+        $number_of_rooms_after_creation = count(Room::all());
+
+        $this->assertSame($number_of_rooms, $number_of_rooms_after_creation);
+    }
+
+    public function test_deleting_a_class_logged_in() {
+        $users = User::role('admin')->get();
+        Auth::login($users[0]);
+
+        $number_of_rooms = count(Room::all());
+        if ($number_of_rooms === 0) {
+            $name = $this->generateRandomString(10);
+            $response = $this->post('/create-room', [
+                'name' => $name,
+            ]);
+        }
+
+        $room_id = collect(Room::first())->first();
+        $number_of_rooms = count(Room::all());
+
+        $response = $this->delete('/delete-room/' . $room_id);
+
+        $response->assertStatus(302);
+
+        $number_of_rooms_after_creation = count(Room::all());
+
+        $this->assertNotSame($number_of_rooms, $number_of_rooms_after_creation);
     }
 
     function generateRandomString($length) {
