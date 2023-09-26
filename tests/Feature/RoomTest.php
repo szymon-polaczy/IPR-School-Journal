@@ -62,6 +62,49 @@ class RoomTest extends TestCase
         $this->assertSame($number_of_rooms, $number_of_rooms_after_creation);
     }
 
+    public function test_editing_a_class_not_logged_in() {
+        $rooms = Room::all();
+        $new_name = $this->generateRandomString(10);
+        $room_id = $rooms[0]->id;
+
+        $response = $this->put('/edit-room/' . $room_id, [
+            'name' => $new_name,
+        ]);
+
+        $response->assertStatus(403);
+    }
+
+    public function test_editing_a_class_logged_in() {
+        $rooms = Room::all();
+        $new_name = $this->generateRandomString(10);
+        $room_id = $rooms[0]->id;
+
+        $users = User::role('admin')->get();
+        Auth::login($users[0]);
+
+        $response = $this->put('/edit-room/' . $room_id, [
+            'name' => $new_name,
+        ]);
+
+        $response->assertStatus(302);
+    }
+
+    public function test_editing_a_class_logged_in_too_long_name() {
+        $rooms = Room::all();
+        $new_name = $this->generateRandomString(300);
+        $room_id = $rooms[0]->id;
+
+        $users = User::role('admin')->get();
+        Auth::login($users[0]);
+
+        $response = $this->put('/edit-room/' . $room_id, [
+            'name' => $new_name,
+        ]);
+
+        $response->assertSessionHasErrors(['name']);
+        $response->assertStatus(302);
+    }
+
     function generateRandomString($length) {
         $characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
         $randomString = '';
