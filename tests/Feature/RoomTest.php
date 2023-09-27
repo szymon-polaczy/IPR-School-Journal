@@ -203,6 +203,50 @@ class RoomTest extends TestCase
         $this->assertSame($number_of_rooms, $number_of_rooms_after_creation);
     }
 
+    public function test_deleting_a_class_logged_in_not_admin() {
+        $users = User::role('admin')->get();//Login as admin first to make sure we can create rooms
+        Auth::login($users[0]);
+
+        $number_of_rooms = count(Room::all());
+        if ($number_of_rooms === 0) {
+            $name = $this->generateRandomString(10);
+            $response = $this->post('/create-room', [
+                'name' => $name,
+            ]);
+        }
+
+        Auth::logout();
+        $users = User::role('teacher')->get();
+        Auth::login($users[0]);
+
+        $room_id = collect(Room::first())->first();
+        $number_of_rooms = count(Room::all());
+
+        $response = $this->delete('/delete-room/' . $room_id);
+
+        $response->assertStatus(403);
+
+        $number_of_rooms_after_creation = count(Room::all());
+
+        $this->assertSame($number_of_rooms, $number_of_rooms_after_creation);
+
+
+        Auth::logout();
+        $users = User::role('student')->get();
+        Auth::login($users[0]);
+
+        $room_id = collect(Room::first())->first();
+        $number_of_rooms = count(Room::all());
+
+        $response = $this->delete('/delete-room/' . $room_id);
+
+        $response->assertStatus(403);
+
+        $number_of_rooms_after_creation = count(Room::all());
+
+        $this->assertSame($number_of_rooms, $number_of_rooms_after_creation);
+    }
+
     public function test_deleting_a_class_logged_in() {
         $users = User::role('admin')->get();
         Auth::login($users[0]);
